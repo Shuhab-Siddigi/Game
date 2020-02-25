@@ -23,6 +23,12 @@ namespace Game
         public MainWindow()
         {
             InitializeComponent();
+
+        }
+
+        private void Player_Movement(object sender, EventArgs e)
+        {
+            
         }
     }
 }

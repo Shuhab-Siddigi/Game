@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Game"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Game" Height="450" Width="800">
     <Grid>
+        <Image x:Name="Player" Height="75" Width="75" Margin="350,156,350,178" Source="adventurer-idle-00.png"/>
 
     </Grid>
 </Window>
