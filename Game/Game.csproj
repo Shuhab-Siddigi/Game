@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="adventurer-idle-00.png" />
     <Resource Include="Bitmaps\Adventurer\Individual Sprites\adventurer-idle-00.png" />
   </ItemGroup>
 
