@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -9,66 +10,60 @@ using System.Windows.Threading;
 
 namespace Game {
 
-  
+
 
     class Player : Image {
 
-        // Movement values for the player 
-        private readonly int height = 50;
-        private readonly int width = 50;
+        
+            public double xPosition { get; set; } = 0;
+            public double yPosition { get; set; } = 0;
 
-        private int startPositionX = 0;
-        private int startPositionY = 0;
-        // A tick for each player 
+        public Player() {
 
-           DispatcherTimer Timer = new DispatcherTimer();
-
-
-
-
-        public Player(int startPositionX, int startPositionY) {
-
-            BitmapImage action = new BitmapImage();
+            this.Width = 100;
+            this.Height = 100;
             
-            action.BeginInit();
-            action.UriSource = new Uri(@"C:\Users\shuha\Source\Repos\Game\Game\Bitmaps\Adventurer\Individual Sprites\adventurer-attack1-00.png", UriKind.RelativeOrAbsolute);
-            action.EndInit();
-            this.Stretch = Stretch.UniformToFill;
-            this.Source = action;
-            
-            this.Width = width;
-            this.Height = height;
-
-
-            Canvas.SetLeft(this, this.startPositionX);
-            Canvas.SetTop(this, this.startPositionY);
-
-
-            
-            Timer.Tick += new EventHandler(update);
-            // Set the update rate      //Y  H  M  S  MS
-            Timer.Interval = new TimeSpan(0, 0, 0, 0, 100); // 60 FPS 
-            Timer.Start();
-            
-            
-          
 
         }
 
-        
-  
+        public void setAction(int action, int counter) {
 
+            String path = Environment.CurrentDirectory;
+            String act = "idle";
+            switch (action) {
+                case 1:
+                    act = "run";
+                    break;
+                case 2:
+                    act = "die";
+                    break;
+                default:
+                    act = "idle";
+                    break;
+            }
 
-        
-        private void update(object sender, EventArgs e) {
-
-            Trace.WriteLine("Player UP");
-            Canvas.SetLeft(this,this.startPositionX);
-            Canvas.SetTop(this, this.startPositionY);
-
-        
+            this.Source = new BitmapImage(new Uri(string.Format(@"{0}\Bitmaps\Adventurer\Individual Sprites\adventurer-" + act + "-0" + counter + ".png", path)));           
         }
+
+        public void update() {
+            Canvas.SetLeft(this, this.xPosition);
+            Canvas.SetTop(this, this.yPosition);
+        }
+
         
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 }

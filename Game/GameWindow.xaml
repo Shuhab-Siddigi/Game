@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Game"
         mc:Ignorable="d"
-        Title="Game" Height="450" Width="800" KeyDown="Window_KeyDown">
-    <Canvas x:Name="Scene" >
-        <Image x:Name="Image" Height="100" Canvas.Left="457" Canvas.Top="135" Width="100"/>
+        Title="Game" Height="450" Width="800" KeyDown="movePlayer">
+    <Canvas x:Name="Scene"  >
+        
     </Canvas>
 </Window>

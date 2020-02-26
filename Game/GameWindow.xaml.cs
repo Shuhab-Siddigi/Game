@@ -6,69 +6,82 @@ using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Diagnostics;
 using System.Windows.Threading;
+using System.Threading;
+using System.Windows.Input;
 
-namespace Game
-{
+namespace Game {
 
     public partial class GameWindow : Window {
 
-        int xPos = 0;
-        int yPos = 0;
 
-        Player player = new Player(0,0);
+
+        Player player = new Player();
+
+
+
 
         public GameWindow() {
-           
-            
+
+
+
+
+
             InitializeComponent();
 
             // Game tick 
             DispatcherTimer Timer = new DispatcherTimer();
-
-            Timer.Tick += new EventHandler(gameUpdate);
-            Timer.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            //Timer.Tick += new EventHandler(backgroundUpdater);
+            Timer.Tick += new EventHandler(elementUpdater);
+            Timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             Timer.Start();
 
-
+            player.setAction(1, 0);
             Scene.Children.Add(player);
 
 
 
 
+        }
+        // Player movement
 
+        private void movePlayer(object sender, KeyEventArgs e) {
 
+            if (e.Key == Key.W) {
+                player.yPosition -= 1;
+                Trace.WriteLine("UP");
+            }
+            if (e.Key == Key.A) {
+                player.xPosition -= 1;
+                Trace.WriteLine("Left");
+            }
+            if (e.Key == Key.S) {
+                 player.yPosition += 1;
+                 Trace.WriteLine("Down");
+            }
+            if (e.Key == Key.D) {
+                player.xPosition += 1;
+                Trace.WriteLine("Right");
+            }
+        }
 
+        private void elementUpdater(object sender, EventArgs e) {
 
+            player.update();
 
-
-
+            Trace.WriteLine("Element timer");
         }
 
 
-        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e) {
 
-            if (e.Key == System.Windows.Input.Key.W) { this.yPos -= 3; Trace.WriteLine("UP "  + yPos); }
-            if (e.Key == System.Windows.Input.Key.S) { this.yPos += 3; Trace.WriteLine("DOWN" + yPos); }
-            if (e.Key == System.Windows.Input.Key.D) { this.xPos += 3; Trace.WriteLine("LEFT" + xPos); }
-            if (e.Key == System.Windows.Input.Key.A) { this.xPos -= 3; Trace.WriteLine("RIGHT"+ xPos); }
-
-
-        }
-
-        private void gameUpdate(object sender, EventArgs e) {
-
-            Canvas.SetLeft(player, xPos);
-            Canvas.SetTop(player, yPos);
-           
-           
-       
-
-
-
+        /*
+        private void backgroundUpdater(object sender, EventArgs e) {
+            Scene.Children.Add(new Player());
+        
+          
+            Trace.WriteLine("Background Timer");
 
         }
-
-
+        */
 
 
     }

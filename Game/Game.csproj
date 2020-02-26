@@ -7,8 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Bitmaps\**" />
+    <EmbeddedResource Remove="Bitmaps\**" />
+    <None Remove="Bitmaps\**" />
+    <Page Remove="Bitmaps\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="adventurer-idle-00.png" />
-    <None Remove="Bitmaps\Adventurer\Individual Sprites\adventurer-idle-00.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,7 +32,6 @@
 
   <ItemGroup>
     <Resource Include="adventurer-idle-00.png" />
-    <Resource Include="Bitmaps\Adventurer\Individual Sprites\adventurer-idle-00.png" />
   </ItemGroup>
 
 </Project>
