@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
@@ -16,7 +17,7 @@ namespace Game {
 
         
             public double xPosition { get; set; } = 0;
-            public double yPosition { get; set; } = 0;
+            public float yPosition { get; set; } = 0;
 
         public Player() {
 
@@ -50,20 +51,6 @@ namespace Game {
             Canvas.SetTop(this, this.yPosition);
         }
 
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+     
     }
 }

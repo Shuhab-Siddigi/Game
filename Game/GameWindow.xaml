@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Game"
         mc:Ignorable="d"
         Title="Game" Height="450" Width="800" KeyDown="movePlayer">
-    <Canvas x:Name="Scene"  >
+    <Canvas x:Name="Scene" >
         
     </Canvas>
 </Window>

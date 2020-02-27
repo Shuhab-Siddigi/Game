@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Windows.Threading;
 using System.Threading;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 
 namespace Game {
 
@@ -17,7 +18,7 @@ namespace Game {
 
         Player player = new Player();
 
-
+        int counter = 0;
 
 
         public GameWindow() {
@@ -25,19 +26,19 @@ namespace Game {
 
 
 
-
+          
             InitializeComponent();
 
             // Game tick 
             DispatcherTimer Timer = new DispatcherTimer();
-            //Timer.Tick += new EventHandler(backgroundUpdater);
+         
             Timer.Tick += new EventHandler(elementUpdater);
-            Timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
+            Timer.Interval = new TimeSpan(0, 0, 0, 0,5);
             Timer.Start();
 
-            player.setAction(1, 0);
+            
             Scene.Children.Add(player);
-
+         
 
 
 
@@ -47,41 +48,42 @@ namespace Game {
         private void movePlayer(object sender, KeyEventArgs e) {
 
             if (e.Key == Key.W) {
-                player.yPosition -= 1;
+                player.yPosition -= 10;
                 Trace.WriteLine("UP");
             }
-            if (e.Key == Key.A) {
-                player.xPosition -= 1;
-                Trace.WriteLine("Left");
-            }
+           
             if (e.Key == Key.S) {
-                 player.yPosition += 1;
-                 Trace.WriteLine("Down");
+                player.yPosition += 10;
+                
+                Trace.WriteLine("Down");
             }
             if (e.Key == Key.D) {
-                player.xPosition += 1;
+                player.xPosition += 10;
+                counter++;
                 Trace.WriteLine("Right");
+            }
+            if (e.Key == Key.A) {
+                
+                player.xPosition -= 10;
+                Trace.WriteLine("Left");
+            }
+            if (counter >= 5) {
+                counter = 0;
             }
         }
 
         private void elementUpdater(object sender, EventArgs e) {
 
+            
             player.update();
-
+            player.setAction(1, counter);
+            
+            
             Trace.WriteLine("Element timer");
         }
 
-
-
-        /*
-        private void backgroundUpdater(object sender, EventArgs e) {
-            Scene.Children.Add(new Player());
+    
         
-          
-            Trace.WriteLine("Background Timer");
-
-        }
-        */
 
 
     }
