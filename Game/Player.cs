@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
-using System.Threading;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
+
 
 namespace Game {
 
     enum ActionType {
         idle,
         run,
-        die,    
+        die,
+        jump,
+        crouch,
     }
 
 
@@ -31,14 +27,16 @@ namespace Game {
         public void SetSource() {
             string path = Environment.CurrentDirectory;
             this.Source = new BitmapImage(
-                new Uri(string.Format(@"{0}\Bitmaps\Adventurer\Individual Sprites\adventurer-{1}-0{2}.png", path,this.Action,GetActionFrame())));     
+                new Uri(string.Format(@"{0}\Bitmaps\adventurer-{1}-{2}.png", path,this.Action,GetActionFrame().ToString("00"))));     
         }
 
         private int GetActionFrame() {
             return this.Action switch
             {
                 ActionType.run => this.Frame%6,
-                ActionType.die => this.Frame%4, 
+                ActionType.die => this.Frame%4,
+                ActionType.jump => this.Frame %4,
+                ActionType.crouch => this.Frame % 4,
                 _ => this.Frame % 4,
             };
 

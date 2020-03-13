@@ -7,9 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="bin\Debug\netcoreapp3.1\Forest\**" />
     <Compile Remove="Bitmaps\**" />
+    <EmbeddedResource Remove="bin\Debug\netcoreapp3.1\Forest\**" />
     <EmbeddedResource Remove="Bitmaps\**" />
+    <None Remove="bin\Debug\netcoreapp3.1\Forest\**" />
     <None Remove="Bitmaps\**" />
+    <Page Remove="bin\Debug\netcoreapp3.1\Forest\**" />
     <Page Remove="Bitmaps\**" />
   </ItemGroup>
 

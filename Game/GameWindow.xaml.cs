@@ -12,21 +12,32 @@ using System.Windows.Media.Animation;
 
 namespace Game {
 
+    static class Settings {
+
+        static public int WindowHeight { get; } = 600;
+        static public int WindowWidth { get; } = 800;
+
+    }
+
     public partial class GameWindow : Window {
 
+        
 
         // Game tick 
         DispatcherTimer GameTick = new DispatcherTimer();
-        
-        // Player Instances
 
+        // Player Instances
+        private double yPos = 0;
+
+        // Game Instances
+        Background background = new Background();
         
         public GameWindow() {
     
             InitializeComponent();
             
             GameTick.Tick += gameTickUpdater;
-            GameTick.Interval = new TimeSpan(0, 0, 0, 0,20);
+            GameTick.Interval = new TimeSpan(0, 0, 0, 0,50);
             string path = Environment.CurrentDirectory;
             
             startGame();
@@ -35,9 +46,14 @@ namespace Game {
 
         private void startGame() {
 
-            Canvas.SetTop(Player, 100);
-            Canvas.SetLeft(Player, 100);
+            background.SetSource();
+            
 
+
+
+            Canvas.SetTop(Player, (Settings.WindowHeight/2)-Player.Height);
+            Canvas.SetLeft(Player,(Settings.WindowWidth/2)-Player.Width);
+            
             GameTick.Start();
             
         }
@@ -48,19 +64,33 @@ namespace Game {
         private void Scene_KeyDown(object sender, KeyEventArgs e) {
             
             if(e.Key == Key.D) {
-                Player.Frame += 1;
+                Player.Action = ActionType.run;
+                
             }
+            if (e.Key == Key.W) {
+                Player.Action = ActionType.jump;    
+            }
+            if(e.Key == Key.S) {
+                Player.Action = ActionType.crouch;
+            }
+        
             
         }
 
         private void Scene_KeyUp(object sender, KeyEventArgs e) {
 
+            Player.Action = ActionType.idle;
+        
         }
 
         private void gameTickUpdater(object sender, EventArgs e) {
-
-            Player.SetSource();
             
+            
+            Player.SetSource();
+            Canvas.SetTop(Player, Canvas.GetTop(Player) - yPos);
+            Player.Frame += 1;
+
+
         }
 
     
