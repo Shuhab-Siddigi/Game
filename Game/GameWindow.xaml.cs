@@ -15,71 +15,52 @@ namespace Game {
     public partial class GameWindow : Window {
 
 
+        // Game tick 
+        DispatcherTimer GameTick = new DispatcherTimer();
+        
+        // Player Instances
 
-        Player player = new Player();
-
-        int counter = 0;
-
-
+        
         public GameWindow() {
-
-
-
-
-          
+    
             InitializeComponent();
-
-            // Game tick 
-            DispatcherTimer Timer = new DispatcherTimer();
-         
-            Timer.Tick += new EventHandler(elementUpdater);
-            Timer.Interval = new TimeSpan(0, 0, 0, 0,5);
-            Timer.Start();
-
             
-            Scene.Children.Add(player);
-         
-
-
+            GameTick.Tick += gameTickUpdater;
+            GameTick.Interval = new TimeSpan(0, 0, 0, 0,20);
+            string path = Environment.CurrentDirectory;
+            
+            startGame();
 
         }
+
+        private void startGame() {
+
+            Canvas.SetTop(Player, 100);
+            Canvas.SetLeft(Player, 100);
+
+            GameTick.Start();
+            
+        }
+
+
         // Player movement
 
-        private void movePlayer(object sender, KeyEventArgs e) {
-
-            if (e.Key == Key.W) {
-                player.yPosition -= 10;
-                Trace.WriteLine("UP");
+        private void Scene_KeyDown(object sender, KeyEventArgs e) {
+            
+            if(e.Key == Key.D) {
+                Player.Frame += 1;
             }
-           
-            if (e.Key == Key.S) {
-                player.yPosition += 10;
-                
-                Trace.WriteLine("Down");
-            }
-            if (e.Key == Key.D) {
-                player.xPosition += 10;
-                counter++;
-                Trace.WriteLine("Right");
-            }
-            if (e.Key == Key.A) {
-                
-                player.xPosition -= 10;
-                Trace.WriteLine("Left");
-            }
-            if (counter >= 5) {
-                counter = 0;
-            }
+            
         }
 
-        private void elementUpdater(object sender, EventArgs e) {
+        private void Scene_KeyUp(object sender, KeyEventArgs e) {
 
+        }
+
+        private void gameTickUpdater(object sender, EventArgs e) {
+
+            Player.SetSource();
             
-            player.update();
-            player.setAction(1, counter);
-            
-            
-            Trace.WriteLine("Element timer");
         }
 
     

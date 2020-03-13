@@ -11,45 +11,40 @@ using System.Windows.Threading;
 
 namespace Game {
 
+    enum ActionType {
+        idle,
+        run,
+        die,    
+    }
 
 
     class Player : Image {
+        public int Frame {get; set;} = 0;
+        public ActionType Action { get; set; } = ActionType.idle;
 
-        
-            public double xPosition { get; set; } = 0;
-            public float yPosition { get; set; } = 0;
-
+        // Define size of player 
         public Player() {
+            this.Width = 80;
+            this.Height = 80;
+        }
+        
+        public void SetSource() {
+            string path = Environment.CurrentDirectory;
+            this.Source = new BitmapImage(
+                new Uri(string.Format(@"{0}\Bitmaps\Adventurer\Individual Sprites\adventurer-{1}-0{2}.png", path,this.Action,GetActionFrame())));     
+        }
 
-            this.Width = 100;
-            this.Height = 100;
-            
+        private int GetActionFrame() {
+            return this.Action switch
+            {
+                ActionType.run => this.Frame%6,
+                ActionType.die => this.Frame%4, 
+                _ => this.Frame % 4,
+            };
 
         }
 
-        public void setAction(int action, int counter) {
-
-            String path = Environment.CurrentDirectory;
-            String act = "idle";
-            switch (action) {
-                case 1:
-                    act = "run";
-                    break;
-                case 2:
-                    act = "die";
-                    break;
-                default:
-                    act = "idle";
-                    break;
-            }
-
-            this.Source = new BitmapImage(new Uri(string.Format(@"{0}\Bitmaps\Adventurer\Individual Sprites\adventurer-" + act + "-0" + counter + ".png", path)));           
-        }
-
-        public void update() {
-            Canvas.SetLeft(this, this.xPosition);
-            Canvas.SetTop(this, this.yPosition);
-        }
+       
 
      
     }
