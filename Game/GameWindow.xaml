@@ -12,5 +12,7 @@
         >
     <Canvas x:Name="Scene"  Height="600" Width="800" Background="LightBlue">
         <local:Player x:Name="Player" Stretch="UniformToFill"/>
+        <local:Block x:Name="Block" Stretch="UniformToFill" Tag="Block"/>
+        
     </Canvas>
 </Window>

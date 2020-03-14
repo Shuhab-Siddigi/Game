@@ -7,10 +7,10 @@ namespace Game  {
 
  
 
-    class Background : Image {
+    class Block : Image {
         public int Frame { get; set; } = 0;
 
-        public Background() {
+        public Block() {
             this.Width = 80;
             this.Height = 80;
         }
@@ -18,10 +18,10 @@ namespace Game  {
         public void SetSource() {
             string path = Environment.CurrentDirectory;
             this.Source = new BitmapImage(
-                new Uri(string.Format(@"{0}\BackgroundItems\block-{1}.png", path, GetLayerFrame().ToString("00"))));
+                new Uri(string.Format(@"{0}\Blocks\block-{1}.png", path, GetBlockFrame().ToString("00"))));
         }
 
-        private int GetLayerFrame() {
+        private int GetBlockFrame() {
             return this.Frame % 2;
         }
     }
