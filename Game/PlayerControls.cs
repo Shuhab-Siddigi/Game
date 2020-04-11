@@ -30,8 +30,10 @@ namespace Game {
                 if (LockFrame == 0) {
                     if ((D || A) && Shift) {
                         player.Action = ActionType.run;
+                        player.xPos += 5;
                     } else if (D || A) {
                         player.Action = ActionType.walk;
+                        player.xPos += (D ? 2 : -2);
                     } else if (Space) {
                         player.Action = ActionType.jump;
                         LockFrame = 4;

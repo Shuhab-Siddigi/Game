@@ -44,7 +44,8 @@ namespace Game {
         private void OnUpdate(object sender, EventArgs e) {
 
             SetControls.Movement(player);
-
+            Canvas.SetLeft(player,player.xPos);
+            
         }
 
     
