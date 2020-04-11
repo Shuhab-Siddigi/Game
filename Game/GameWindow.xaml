@@ -7,11 +7,12 @@
         mc:Ignorable="d"
         Title="Game" 
         Height="640" Width="800" 
-        KeyDown="Scene_KeyDown" KeyUp="Scene_KeyUp"
         FocusManager.FocusedElement="{Binding ElementName=Scene}" 
         >
     <Canvas x:Name="Scene"  Height="600" Width="800" Background="LightBlue">
-        <local:Player x:Name="Player" Stretch="UniformToFill" xPos="0"   yPos="400" Tag="Player"/>
+       
+        
+
         
     </Canvas>
 </Window>

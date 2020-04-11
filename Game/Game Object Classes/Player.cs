@@ -10,6 +10,7 @@ namespace Game {
 
     enum ActionType {
         idle,
+        walk,
         run,
         die,
         jump,
@@ -23,7 +24,6 @@ namespace Game {
 
         public int yPos    {get; set;} = 0;
         
-
         private static Dictionary<ActionType, List<BitmapImage>> Sources = new Dictionary<ActionType, List<BitmapImage>>();
 
         // Create a Dictionary to hold all frames for each Actions
@@ -32,6 +32,7 @@ namespace Game {
             {ActionType.die,    4},
             {ActionType.jump,   4},
             {ActionType.crouch, 4},
+            {ActionType.walk,    6},
             {ActionType.run,    6},
         };
 
@@ -68,6 +69,7 @@ namespace Game {
         private int GetActionFrame() {
             return this.Action switch
             {
+                ActionType.walk => this.Frame % 6,
                 ActionType.run => this.Frame % 6,
                 ActionType.die => this.Frame % 4,
                 ActionType.jump => this.Frame % 4,
@@ -82,11 +84,12 @@ namespace Game {
 
             return this.Action switch
             {
+                ActionType.walk     => 80,
                 ActionType.run    =>    80,
                 ActionType.die    =>    70,
                 ActionType.jump   =>    120,
-                ActionType.crouch =>    160,
-                _                 =>    160,
+                ActionType.crouch =>    250,
+                _                 =>    200,
             };
 
         }
