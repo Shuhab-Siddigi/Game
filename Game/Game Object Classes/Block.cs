@@ -9,6 +9,8 @@ namespace Game  {
 
     class Block : Image {
         public int Frame { get; set; } = 0;
+        public double xPos { get; set; } = 0;
+        public double yPos { get; set; } = 0;
 
         public Block() {
             this.Width = 80;
