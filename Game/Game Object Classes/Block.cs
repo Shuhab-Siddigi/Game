@@ -13,8 +13,8 @@ namespace Game  {
         public double yPos { get; set; } = 0;
 
         public Block() {
-            this.Width = 80;
-            this.Height = 80;
+            this.Width = 50;
+            this.Height = 50;
         }
 
         public void SetSource() {

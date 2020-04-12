@@ -20,9 +20,9 @@ namespace Game {
     class Player : Image {
         public int Frame { get; set; } = 0;
         public ActionType Action { get; set; } = ActionType.idle;
-        public int xPos { get; set; } = 0;
+        public int xPos { get; set; } = 300;
 
-        public int yPos    {get; set;} = 0;
+        public int yPos    {get; set;} = 300;
         
         private static Dictionary<ActionType, List<BitmapImage>> Sources = new Dictionary<ActionType, List<BitmapImage>>();
 
@@ -40,6 +40,7 @@ namespace Game {
         public Player() {
             this.Width = 80;
             this.Height = 80;
+            this.Stretch = System.Windows.Media.Stretch.UniformToFill;
         }
 
         // Static Constructor to load all the images to a Dictonary
@@ -84,7 +85,7 @@ namespace Game {
 
             return this.Action switch
             {
-                ActionType.walk     => 80,
+                ActionType.walk   =>    80,
                 ActionType.run    =>    80,
                 ActionType.die    =>    70,
                 ActionType.jump   =>    120,

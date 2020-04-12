@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Game {
@@ -30,15 +31,17 @@ namespace Game {
                 if (LockFrame == 0) {
                     if ((D || A) && Shift) {
                         player.Action = ActionType.run;
-                        player.xPos += 5;
+                        player.xPos += (D ? 4 : -4);
                     } else if (D || A) {
                         player.Action = ActionType.walk;
                         player.xPos += (D ? 2 : -2);
                     } else if (Space) {
                         player.Action = ActionType.jump;
+                        player.yPos -= 4;
                         LockFrame = 4;
                     } else if (S) {
                         player.Action = ActionType.crouch;
+                        player.yPos += 4;
                     } else {
                         player.Action = ActionType.idle;
                     }
@@ -47,14 +50,13 @@ namespace Game {
                 }
 
                 player.SetSource();
-                
 
                 player.Frame += 1;
                 FrameCounter.Restart();
 
-
-
             }
+            Canvas.SetLeft(player, player.xPos);
+            Canvas.SetTop(player, player.yPos);
         }
     }
 }
