@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
-
+using System.Windows.Shapes;
 
 namespace Game {
 
@@ -21,10 +23,12 @@ namespace Game {
         public int Frame { get; set; } = 0;
         public ActionType Action { get; set; } = ActionType.idle;
         public int xPos { get; set; } = 300;
-
         public int yPos    {get; set;} = 300;
         
         private static Dictionary<ActionType, List<BitmapImage>> Sources = new Dictionary<ActionType, List<BitmapImage>>();
+
+        public Rectangle HitBoxRender  = new Rectangle();
+        public Rect HitBox  = new Rect();
 
         // Create a Dictionary to hold all frames for each Actions
         private static Dictionary<ActionType, int> ActionTypeFrames = new Dictionary<ActionType, int>() {
@@ -41,6 +45,7 @@ namespace Game {
             this.Width = 80;
             this.Height = 80;
             this.Stretch = System.Windows.Media.Stretch.UniformToFill;
+
         }
 
         // Static Constructor to load all the images to a Dictonary
@@ -63,7 +68,6 @@ namespace Game {
         }
 
         public void SetSource() {
-
             this.Source = Player.Sources[this.Action][GetActionFrame()];
         }
 
@@ -94,6 +98,32 @@ namespace Game {
             };
 
         }
+
+        public void Collision() {
+
+            HitBox.Width = this.Width / 2;
+            HitBox.Height = this.Height;
+            HitBox.X = Canvas.GetLeft(this) + (this.Width / 2);
+            HitBox.Y = Canvas.GetTop(this);
+
+            if(Action == ActionType.crouch) {
+                HitBox.Height = HitBox.Height / 2;
+                HitBox.Y = HitBox.Y + HitBox.Height;
+            }
+
+        }
+
+        public void CollisionBoxRender() {
+            HitBoxRender.Width = this.HitBox.Width;
+            HitBoxRender.Height = this.HitBox.Height;
+            HitBoxRender.Stroke = Brushes.Black;
+            Canvas.SetLeft(HitBoxRender, HitBox.X);
+            Canvas.SetTop(HitBoxRender, HitBox.Y);
+
+            
+        }
+
+       
 
 
 

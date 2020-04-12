@@ -49,14 +49,16 @@ namespace Game {
                     LockFrame--;
                 }
 
+                // Setting the PNG to the player
                 player.SetSource();
-
+                // Next Player Frame 
                 player.Frame += 1;
+                // Movement for the player on the Canvas
+                Canvas.SetLeft(player, player.xPos);
+                Canvas.SetTop(player, player.yPos);
                 FrameCounter.Restart();
-
             }
-            Canvas.SetLeft(player, player.xPos);
-            Canvas.SetTop(player, player.yPos);
+           
         }
     }
 }
