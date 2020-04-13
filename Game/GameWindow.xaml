@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:Game"
         mc:Ignorable="d"
         Title="Game" 
-        Height="640" Width="800" 
+        Height="600" Width="800" 
+        WindowStyle="SingleBorderWindow"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
         FocusManager.FocusedElement="{Binding ElementName=Scene}" 
         >
     <Canvas x:Name="Scene"  Height="600" Width="800" Background="LightBlue">

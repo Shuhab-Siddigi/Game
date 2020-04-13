@@ -31,31 +31,29 @@ namespace Game {
                 if (LockFrame == 0) {
                     if ((D || A) && Shift) {
                         player.Action = ActionType.run;
-                        player.xPos += (D ? 4 : -4);
+                        player.X += (D ? 0.5 : -0.5);
+                       
                     } else if (D || A) {
                         player.Action = ActionType.walk;
-                        player.xPos += (D ? 2 : -2);
-                    } else if (Space) {
+                        player.X += (D ? 0.25 : -0-5);
+                    } else if (Space||W) {
                         player.Action = ActionType.jump;
-                        player.yPos -= 4;
+                        player.Y -= 4;
                         LockFrame = 4;
                     } else if (S) {
                         player.Action = ActionType.crouch;
-                        player.yPos += 4;
+                        player.Y += 4;
                     } else {
                         player.Action = ActionType.idle;
                     }
                 } else {
                     LockFrame--;
                 }
-
                 // Setting the PNG to the player
                 player.SetSource();
                 // Next Player Frame 
                 player.Frame += 1;
                 // Movement for the player on the Canvas
-                Canvas.SetLeft(player, player.xPos);
-                Canvas.SetTop(player, player.yPos);
                 FrameCounter.Restart();
             }
            

@@ -18,18 +18,22 @@ namespace Game  {
     }
 
     class Block : Image { 
-        public double xPos { get; set; } = 0;
-        public double yPos { get; set; } = 0;
+        public double X { get; set; } = 0;
+        public double Y { get; set; } = 0;
         public BlockType Type { get; set; } = BlockType.yellow;
+
+        private BlockControls controls = new BlockControls();
 
         private static Dictionary<BlockType, BitmapImage> Sources = new Dictionary<BlockType,BitmapImage>();
 
         public Rectangle HitBoxRender = new Rectangle();
         public Rect HitBox = new Rect();
 
-        public Block() {
-            this.Width = 50;
-            this.Height = 50;
+        public Block(int SpawnPositionX, int SpawnPositionY, int Width, int Height) {
+            this.Width = Width;
+            this.Height = Height;
+            this.X = SpawnPositionX;
+            this.Y = SpawnPositionY;
         }
       
         public void SetSource() {
@@ -40,7 +44,6 @@ namespace Game  {
 
             // Create a path to the bitmaps
             string path = Environment.CurrentDirectory;
-            
 
             foreach (BlockType type in Enum.GetValues(typeof(BlockType))) {
                 Trace.WriteLine(type.ToString());
@@ -51,9 +54,7 @@ namespace Game  {
             }
         }
 
-        
         public void Collision() {
-
             HitBox.Width = this.Width;
             HitBox.Height = this.Height;
             HitBox.X = Canvas.GetLeft(this);
@@ -68,6 +69,14 @@ namespace Game  {
             Canvas.SetLeft(HitBoxRender, HitBox.X);
             Canvas.SetTop(HitBoxRender, HitBox.Y);
 
+        }
+
+        public void Update() {
+            Canvas.SetLeft(this, this.X); // position X of player
+            Canvas.SetTop(this, this.Y);  // position Y of player
+            this.Collision();
+            this.CollisionBoxRender();
+            controls.BlockPosition(this);
         }
     }
 
