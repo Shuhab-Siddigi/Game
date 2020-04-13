@@ -24,8 +24,6 @@ namespace Game {
         public double X { get; set; } = 0; // Position X
         public double Y {get; set;} = 0;   // Position Y 
 
- 
-        public bool ShowHitBox { get; set; } = false;
         
         private static Dictionary<ActionType, List<BitmapImage>> Sources = new Dictionary<ActionType, List<BitmapImage>>();
 
@@ -104,8 +102,7 @@ namespace Game {
 
         }
 
-        private void Collision() {
-
+        public void Collision() {
             HitBox.Width = this.Width / 2;
             HitBox.Height = this.Height;
             HitBox.X = Canvas.GetLeft(this) + (this.Width / 2);
@@ -113,7 +110,7 @@ namespace Game {
         }
 
         // Add this to the Canvas if To set the CollisionBox Visible
-        private void CollisionBoxRender() {
+        public void CollisionBoxRender() {
             HitBoxRender.Width = this.HitBox.Width;
             HitBoxRender.Height = this.HitBox.Height;
             HitBoxRender.Stroke = Brushes.Black;
@@ -129,7 +126,6 @@ namespace Game {
             controls.Movement(this);
         }
 
-      
 
     }
 }

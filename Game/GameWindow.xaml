@@ -13,6 +13,6 @@
         FocusManager.FocusedElement="{Binding ElementName=Scene}" 
         >
     <Canvas x:Name="Scene"  Height="600" Width="800" Background="LightBlue">
-       
+        
     </Canvas>
 </Window>

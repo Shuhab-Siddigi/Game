@@ -5,9 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace Game  {
@@ -34,6 +32,7 @@ namespace Game  {
             this.Height = Height;
             this.X = SpawnPositionX;
             this.Y = SpawnPositionY;
+            this.Stretch = System.Windows.Media.Stretch.Uniform;
         }
       
         public void SetSource() {
@@ -59,7 +58,6 @@ namespace Game  {
             HitBox.Height = this.Height;
             HitBox.X = Canvas.GetLeft(this);
             HitBox.Y = Canvas.GetTop(this);
-
         }
 
         public void CollisionBoxRender() {
@@ -68,7 +66,6 @@ namespace Game  {
             HitBoxRender.Stroke = Brushes.Black;
             Canvas.SetLeft(HitBoxRender, HitBox.X);
             Canvas.SetTop(HitBoxRender, HitBox.Y);
-
         }
 
         public void Update() {
