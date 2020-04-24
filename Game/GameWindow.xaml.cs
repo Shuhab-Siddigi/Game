@@ -4,26 +4,33 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Collections.Generic;
+using System.Windows.Media.Imaging;
 
 namespace Game {
 
     static class GlobalSettings {
 
-        //static public int WindowHeight { get; } = 1920;
-        //static public int WindowWidth { get; } = 1080;
+        static public int WindowHeight { get; set; }
+        static public int WindowWidth { get; set; }
         
-
+        
     }
 
     public partial class GameWindow : Window {
+        
+        
 
         Player player = new Player(200,200,50,50);
-        List<Image> Blocks = new List<Image>();
+        List<Block> Blocks = new List<Block>();
         List<Image> BlocksCollisionBoxs = new List<Image>();
-        Block block1 = new Block(100, 200, 50, 50);
+         static double temp = 0;
+        
+
+        
         public GameWindow() {
 
             InitializeComponent();
+ 
             startGame();
         }
 
@@ -31,34 +38,47 @@ namespace Game {
            
             CompositionTarget.Rendering += OnUpdate;
 
-            for(int i = 0; i < 10; i++) {
-                Blocks.Add(new Block(0 + 50 * i, 500, 50, 50));
+            for(int i = 0; i < 19; i++) {
+                Blocks.Add(new Block(0 + 50 * i, 525, 50, 50));
                 Scene.Children.Add(Blocks[i]);
+                Scene.Children.Add(Blocks[i].HitBoxRender);
             }
-            foreach(Block block in Blocks) {
-                Scene.Children.Add(block.HitBoxRender);
-            }
-            Scene.Children.Add(block1);
-            Scene.Children.Add(block1.HitBoxRender);
+            
             Scene.Children.Add(player);
             Scene.Children.Add(player.HitBoxRender);
-           
-            
+
         }
 
         private void OnUpdate(object sender, EventArgs e) {
             // Update objects first then do stuff order matters!
             player.Update();
-            block1.Update();
 
-            foreach (Block block in Blocks) {
-                block.Update();
-                if (player.HitBox.IntersectsWith(block.HitBox)) {
-                    block.HitBoxRender.Stroke = Brushes.Red;
+           
+            for (int i = 0; i < Blocks.Count; i++) {
+                temp = Canvas.GetLeft(Blocks[i]);
+                 
+                Blocks[i].Update();
+
+                if (i % 2 == 0) {
+                    Blocks[i].Type = BlockType.grey;
+                } 
+                if (player.HitBox.IntersectsWith(Blocks[i].HitBox)) {
+                    player.HitBoxRender.Stroke = Brushes.Red;
+                    Blocks[i].HitBoxRender.Stroke = Brushes.Red;
+                    player.Y -= 1;
+                } else {
+                    player.Y += 0.02;
                 }
+               
+                    //block.Opacity = 0.25;
+                
+                
             }
+
             
            
+
+
 
 
 

@@ -9,9 +9,8 @@
         Height="600" Width="800" 
         WindowStyle="SingleBorderWindow"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize"
-        FocusManager.FocusedElement="{Binding ElementName=Scene}" 
-        >
+        
+        FocusManager.FocusedElement="{Binding ElementName=Scene}" >
     <Canvas x:Name="Scene"  Height="600" Width="800" Background="LightBlue">
         
     </Canvas>

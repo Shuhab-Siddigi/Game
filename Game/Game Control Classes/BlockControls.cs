@@ -24,6 +24,7 @@ namespace Game {
             bool Space = Keyboard.IsKeyDown(Key.Space);
             bool Shift = Keyboard.IsKeyDown(Key.LeftShift);
 
+             // Becomes unstable under 30 millis 
             if (FrameCounter.ElapsedMilliseconds > 40) {
 
                 if ((D || A) && Shift) {
@@ -31,25 +32,30 @@ namespace Game {
                 } else if (D || A) {
                     block.X -= (D ? 1 : -1);
                 } else if (Space) {
-                    block.Y += 4;
+                   // block.Y += 4;
                 } else if (S) {
-                    block.Y -= 4;
+                  //  block.Y -= 4;
                 } else {
 
                 }
-                if (block.X < 0 - block.Width) {
-                    block.X = 800;
+
+
+                if (block.X <= -block.Width) {
+                    block.X = 800+block.Width;
                 }
-                if (block.X > 800 + block.Width) {
-                    block.X = 0 - block.Width;
+                else if (block.X > (800 + block.Width)) {
+                    block.X = (-block.Width);
                 }
 
+                // ResizeMode="NoResize"
 
                 block.SetSource();
                 // Next Player Frame 
                 // Movement for the player on the Canvas
                 Canvas.SetLeft(block, block.X);
                 Canvas.SetTop(block, block.Y);
+
+
                 FrameCounter.Restart();
             }
         }

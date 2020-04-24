@@ -71,6 +71,7 @@ namespace Game {
         }
 
         public void SetSource() {
+
             this.Source = Player.Sources[this.Action][GetActionFrame()];
         }
 

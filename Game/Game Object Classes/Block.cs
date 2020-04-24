@@ -32,7 +32,7 @@ namespace Game  {
             this.Height = Height;
             this.X = SpawnPositionX;
             this.Y = SpawnPositionY;
-            this.Stretch = System.Windows.Media.Stretch.Uniform;
+            this.Stretch = System.Windows.Media.Stretch.Fill;
         }
       
         public void SetSource() {
@@ -79,3 +79,6 @@ namespace Game  {
 
     
 }
+
+
+
