@@ -41,10 +41,10 @@ namespace Game {
 
 
                 if (block.X <= -block.Width) {
-                    block.X = 800+block.Width;
+                    block.X = GlobalSettings.ScreenWidth+block.Width;
                 }
                 else if (block.X > (800 + block.Width)) {
-                    block.X = (-block.Width);
+                    block.X = (GlobalSettings.ScreenWidth-block.Width);
                 }
 
                 // ResizeMode="NoResize"

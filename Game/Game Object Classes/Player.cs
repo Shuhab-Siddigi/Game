@@ -8,6 +8,8 @@ using System.Windows.Shapes;
 
 namespace Game {
 
+
+
     enum ActionType {
         idle,
         walk,
@@ -24,6 +26,7 @@ namespace Game {
         public double X { get; set; } = 0; // Position X
         public double Y {get; set;} = 0;   // Position Y 
 
+
         
         private static Dictionary<ActionType, List<BitmapImage>> Sources = new Dictionary<ActionType, List<BitmapImage>>();
 
@@ -31,6 +34,17 @@ namespace Game {
 
         public Rectangle HitBoxRender  = new Rectangle();
         public Rect HitBox  = new Rect();
+
+        public bool isIdle { get; set; } = false;
+        public bool isFalling { get; set; } = false;
+        public bool isWalking { get; set; } = false;
+        public bool isRunning { get; set; } = false;
+        public bool isJumping { get; set; } = false;
+        public bool isCrouching { get; set; } = false;
+
+        public bool isCollidingLeft { get; set; } = false;
+        public bool isCollidingRight { get; set; } = false;
+   
 
         // Create a Dictionary to hold all frames for each Actions
         private static Dictionary<ActionType, int> ActionTypeFrames = new Dictionary<ActionType, int>() {
