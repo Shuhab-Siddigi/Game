@@ -24,8 +24,8 @@ namespace Game  {
 
         private static Dictionary<BlockType, BitmapImage> Sources = new Dictionary<BlockType,BitmapImage>();
 
-        public Rectangle HitBoxRender = new Rectangle();
         public Rect HitBox = new Rect();
+        public Rectangle HitBoxRender = new Rectangle();
 
         public Block(int SpawnPositionX, int SpawnPositionY, int Width, int Height) {
             this.Width = Width;
@@ -62,18 +62,21 @@ namespace Game  {
 
         public void CollisionBoxRender() {
             HitBoxRender.Width = this.HitBox.Width;
-            HitBoxRender.Height = this.HitBox.Height;
-            HitBoxRender.Stroke = Brushes.Black;
+            HitBoxRender.Height = this.HitBox.Height; 
             Canvas.SetLeft(HitBoxRender, HitBox.X);
             Canvas.SetTop(HitBoxRender, HitBox.Y);
         }
 
-        public void Update() {
-            Canvas.SetLeft(this, this.X); // position X of player
-            Canvas.SetTop(this, this.Y);  // position Y of player
+        public void DefaultSettings() {
+            HitBoxRender.Stroke = Brushes.Black;
+        }
+
+        public void Update(Player player) {
             this.Collision();
             this.CollisionBoxRender();
-            controls.BlockPosition(this);
+            controls.BlockPosition(this,player);
+            Canvas.SetLeft(this, this.X); // position X of player
+            Canvas.SetTop(this, this.Y);  // position Y of player
         }
     }
 

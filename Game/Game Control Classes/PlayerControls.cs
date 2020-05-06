@@ -27,7 +27,7 @@ namespace Game {
             bool Shift = Keyboard.IsKeyDown(Key.LeftShift);
 
             if (FrameCounter.ElapsedMilliseconds > player.ActionTime()) {
-
+        
                  player.isIdle = false;
                  player.isWalking = false;
                  player.isRunning  = false;
@@ -37,7 +37,7 @@ namespace Game {
                 if (LockFrame == 0) {
                     if ((D || A) && Shift) {
                         player.Action = ActionType.run;
-                        player.isRunning = true;
+                        player.isRunning = true;       
                     } else if (D || A) {
                         player.Action = ActionType.walk;
                         player.isWalking = true;
@@ -62,7 +62,16 @@ namespace Game {
                 // Movement for the player on the Canvas
                 FrameCounter.Restart();
             }
-           
+            /*
+            if (player.isFalling) {
+                player.Y += 0.9;
+            }
+           */
+
+
+
+
         }
+
     }
 }

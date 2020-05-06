@@ -30,7 +30,7 @@ namespace Game {
         
         private static Dictionary<ActionType, List<BitmapImage>> Sources = new Dictionary<ActionType, List<BitmapImage>>();
 
-        private PlayerControls controls = new PlayerControls();
+        private PlayerControls playercontrols = new PlayerControls();
 
         public Rectangle HitBoxRender  = new Rectangle();
         public Rect HitBox  = new Rect();
@@ -41,10 +41,10 @@ namespace Game {
         public bool isRunning { get; set; } = false;
         public bool isJumping { get; set; } = false;
         public bool isCrouching { get; set; } = false;
+        public bool isBlockedLeft { get; set; } = false;
+        public bool isBlockedRight { get; set; } = false;
 
-        public bool isCollidingLeft { get; set; } = false;
-        public bool isCollidingRight { get; set; } = false;
-   
+
 
         // Create a Dictionary to hold all frames for each Actions
         private static Dictionary<ActionType, int> ActionTypeFrames = new Dictionary<ActionType, int>() {
@@ -117,30 +117,38 @@ namespace Game {
 
         }
 
-        public void Collision() {
+        public void CollisionBox() {
             HitBox.Width = this.Width / 2;
-            HitBox.Height = this.Height;
+            HitBox.Height = this.Height - 10;
             HitBox.X = Canvas.GetLeft(this) + (this.Width / 2);
-            HitBox.Y = Canvas.GetTop(this);
+            HitBox.Y = Canvas.GetTop(this) + 10;
         }
 
         // Add this to the Canvas if To set the CollisionBox Visible
         public void CollisionBoxRender() {
             HitBoxRender.Width = this.HitBox.Width;
             HitBoxRender.Height = this.HitBox.Height;
-            HitBoxRender.Stroke = Brushes.Black;
+           
             Canvas.SetLeft(HitBoxRender, HitBox.X);
             Canvas.SetTop(HitBoxRender, HitBox.Y);         
+        }
+
+        public void DefaultSettings() {
+            this.isFalling = true;
+            this.isBlockedLeft = false;
+            this.isBlockedRight = false;
+            HitBoxRender.Stroke = Brushes.Black;
         }
 
         public void Update() {
             Canvas.SetLeft(this, this.X); // position X of player
             Canvas.SetTop(this, this.Y);  // position Y of player
-            this.Collision();
+            this.CollisionBox();
             this.CollisionBoxRender();
-            controls.Movement(this);
+            playercontrols.Movement(this);
+            // If the player is not touching anything
+            
         }
-
 
     }
 }
