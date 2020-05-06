@@ -17,7 +17,7 @@ namespace Game {
 
 
         CollisionDetection collision = new CollisionDetection();
-        Player player = new Player(200,400,50,50);
+        Player player = new Player(200,100,50,50);
         List<Block> Blocks = new List<Block>();
         List<Image> BlocksCollisionBoxs = new List<Image>();
 
@@ -38,15 +38,15 @@ namespace Game {
             CompositionTarget.Rendering += OnUpdate;
 
 
-            for(int i = 0; i < 1; i++) {
+            for(int i = 0; i < 18; i++) {
                 Blocks.Add(new Block(50 * i, 400, 50, 50));
                 
             }
-            /*
+            
             for (int j = 0; j < 19/3; j++) {
-                Blocks.Add(new Block(50 * j*3, 450, 50, 50));
+                Blocks.Add(new Block(50 * j*3, 350, 50, 50));
             }
-            */
+            
 
             foreach(Block block in Blocks) {
                 Scene.Children.Add(block);

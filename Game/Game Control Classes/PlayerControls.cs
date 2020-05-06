@@ -26,6 +26,10 @@ namespace Game {
             bool Space = Keyboard.IsKeyDown(Key.Space);
             bool Shift = Keyboard.IsKeyDown(Key.LeftShift);
 
+            if (player.isFalling) {
+                player.Y += 2;
+            }
+
             if (FrameCounter.ElapsedMilliseconds > player.ActionTime()) {
         
                  player.isIdle = false;
@@ -62,11 +66,8 @@ namespace Game {
                 // Movement for the player on the Canvas
                 FrameCounter.Restart();
             }
-            /*
-            if (player.isFalling) {
-                player.Y += 0.9;
-            }
-           */
+            
+           
 
 
 

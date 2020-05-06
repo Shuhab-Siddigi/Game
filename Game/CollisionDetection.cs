@@ -32,8 +32,8 @@ namespace Game {
 
             bool Above = player.Top == intersection.Top;
             bool Below = player.Bottom == intersection.Bottom;
-            bool Right = player.Right == intersection.Right;
-            bool Left = player.Left == intersection.Left;
+            bool Right = player.Right == intersection.Right && !Above;
+            bool Left = player.Left == intersection.Left && !Above;
 
 
             return new Dictionary<CollisionEdge, bool>() {
@@ -54,13 +54,13 @@ namespace Game {
             if (EdgeHit[CollisionEdge.Below]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 block.HitBoxRender.Stroke = Brushes.Red;
-                player.isFalling = false;
+               
                 Trace.WriteLine("Below");
             }
             if (EdgeHit[CollisionEdge.Above]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 block.HitBoxRender.Stroke = Brushes.Red;
-                
+                 player.isFalling = false;
                 Trace.WriteLine("Above");
             }
             if (EdgeHit[CollisionEdge.Left]) {
@@ -76,10 +76,7 @@ namespace Game {
                 Trace.WriteLine("Right");
                 
             }
-            Trace.WriteLine("\n");
-            Trace.WriteLine("\n");
-            Trace.WriteLine("\n");
-
+            
 
         }
 
