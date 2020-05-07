@@ -18,6 +18,7 @@ namespace Game  {
     class Block : Image { 
         public double X { get; set; } = 0;
         public double Y { get; set; } = 0;
+        public static int blocksize { get; set; } = 20;
         public BlockType Type { get; set; } = BlockType.yellow;
 
         private BlockControls controls = new BlockControls();
@@ -27,9 +28,9 @@ namespace Game  {
         public Rect HitBox = new Rect();
         public Rectangle HitBoxRender = new Rectangle();
 
-        public Block(int SpawnPositionX, int SpawnPositionY, int Width, int Height) {
-            this.Width = Width;
-            this.Height = Height;
+        public Block(int SpawnPositionX, int SpawnPositionY) {
+            this.Width = blocksize;
+            this.Height = blocksize;
             this.X = SpawnPositionX;
             this.Y = SpawnPositionY;
             this.Stretch = System.Windows.Media.Stretch.Fill;

@@ -54,7 +54,6 @@ namespace Game {
             if (EdgeHit[CollisionEdge.Below]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 block.HitBoxRender.Stroke = Brushes.Red;
-               
                 Trace.WriteLine("Below");
             }
             if (EdgeHit[CollisionEdge.Above]) {
@@ -66,13 +65,13 @@ namespace Game {
             if (EdgeHit[CollisionEdge.Left]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 block.HitBoxRender.Stroke = Brushes.Red;
-                player.isBlockedLeft = true;
+               // player.isBlockedLeft = true;
                 Trace.WriteLine("Left");
             }
             if (EdgeHit[CollisionEdge.Right]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 block.HitBoxRender.Stroke = Brushes.Red;
-                player.isBlockedRight = true;
+           //     player.isBlockedRight = true;
                 Trace.WriteLine("Right");
                 
             }

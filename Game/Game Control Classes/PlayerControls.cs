@@ -26,10 +26,8 @@ namespace Game {
             bool Space = Keyboard.IsKeyDown(Key.Space);
             bool Shift = Keyboard.IsKeyDown(Key.LeftShift);
 
-            if (player.isFalling) {
-                player.Y += 2;
-            }
 
+          
             if (FrameCounter.ElapsedMilliseconds > player.ActionTime()) {
         
                  player.isIdle = false;
@@ -39,16 +37,23 @@ namespace Game {
                  player.isCrouching = false;
 
                 if (LockFrame == 0) {
+
+                    
+                    
                     if ((D || A) && Shift) {
                         player.Action = ActionType.run;
-                        player.isRunning = true;       
+                        player.isRunning = true;
+                        player.X += (D ? 6 : -4);
                     } else if (D || A) {
                         player.Action = ActionType.walk;
                         player.isWalking = true;
+                        player.X += (D ? 3 : -2);
                     } else if (Space||W) {
                         player.Action = ActionType.jump;
+                            player.Y -= 4;
                         LockFrame = 4;
                         player.isJumping = true;
+
                     } else if (S) {
                         player.Action = ActionType.crouch;
                         player.isCrouching = true;
@@ -57,8 +62,12 @@ namespace Game {
                         player.isIdle = true;
                     }
                 } else {
-                    LockFrame--;
+                  LockFrame--;
                 }
+                
+
+
+
                 // Setting the PNG to the player
                 player.SetSource();
                 // Next Player Frame 
@@ -66,8 +75,13 @@ namespace Game {
                 // Movement for the player on the Canvas
                 FrameCounter.Restart();
             }
-            
-           
+
+            if (player.isFalling && player.Action != ActionType.jump && LockFrame == 0) {
+                    player.Y += 2 ;
+                
+            }
+
+
 
 
 
