@@ -54,7 +54,7 @@ namespace Game  {
             }
         }
 
-        public void Collision() {
+        public void CollisionBox() {
             HitBox.Width = this.Width;
             HitBox.Height = this.Height;
             HitBox.X = Canvas.GetLeft(this);
@@ -73,7 +73,7 @@ namespace Game  {
         }
 
         public void Update(Player player) {
-            this.Collision();
+            this.CollisionBox();
             this.CollisionBoxRender();
             controls.BlockPosition(this,player);
             Canvas.SetLeft(this, this.X); // position X of player

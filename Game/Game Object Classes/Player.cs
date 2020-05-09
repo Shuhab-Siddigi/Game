@@ -128,7 +128,7 @@ namespace Game {
         public void CollisionBoxRender() {
             HitBoxRender.Width = this.HitBox.Width;
             HitBoxRender.Height = this.HitBox.Height;
-           
+   
             Canvas.SetLeft(HitBoxRender, HitBox.X);
             Canvas.SetTop(HitBoxRender, HitBox.Y);         
         }

@@ -38,8 +38,6 @@ namespace Game {
 
                 if (LockFrame == 0) {
 
-                    
-                    
                     if ((D || A) && Shift) {
                         player.Action = ActionType.run;
                         player.isRunning = true;
@@ -51,7 +49,7 @@ namespace Game {
                     } else if (Space||W) {
                         player.Action = ActionType.jump;
                             player.Y -= 4;
-                        LockFrame = 4;
+                        
                         player.isJumping = true;
 
                     } else if (S) {
@@ -78,7 +76,6 @@ namespace Game {
 
             if (player.isFalling && player.Action != ActionType.jump && LockFrame == 0) {
                     player.Y += 2 ;
-                
             }
 
 
