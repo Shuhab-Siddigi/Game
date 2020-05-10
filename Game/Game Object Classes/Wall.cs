@@ -65,13 +65,9 @@ namespace Game.Game_Object_Classes {
 
         }
 
-        public void DefaultSettings() {
-            HitBoxRender.Stroke = Brushes.Black;
-        }
-
         public void Update(Player player) {
-
-            foreach(Block block in this) {
+            HitBoxRender.Stroke = Brushes.Black;
+            foreach (Block block in this) {
                 block.Update(player);
             }
             CollisionBox();

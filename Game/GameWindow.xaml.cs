@@ -71,18 +71,14 @@ namespace Game {
         }
 
         private void OnUpdate(object sender, EventArgs e) {
+            Input.Update();
             player.DefaultSettings();
 
-            TopWall.DefaultSettings();
+         
             TopWall.Update(player);
-            BottomWall.DefaultSettings();
-            BottomWall.Update(player);
-            LeftWall.DefaultSettings();
-            LeftWall.Update(player);
-            RightWall.DefaultSettings();
-            RightWall.Update(player);
-
-            
+            BottomWall.Update(player);  
+            LeftWall.Update(player);       
+            RightWall.Update(player);       
             player.Update();
 
 
