@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Game.Game_Animation_Classes {
     class Animation {
@@ -16,6 +18,16 @@ namespace Game.Game_Animation_Classes {
         }
 
         public void PlayerAnimation(Player player) {
+
+            if (Input.A) { 
+            player.RenderTransformOrigin = new Point(0.5, 0.5);
+            ScaleTransform flippedPlayer = new ScaleTransform(-1, 1);
+            player.RenderTransform = flippedPlayer;
+            } else {
+                player.RenderTransformOrigin = new Point(0.5, 0.5);
+                ScaleTransform flippedPlayer = new ScaleTransform(1, 1);
+                player.RenderTransform = flippedPlayer;
+            }
 
             if (PlayerFrameCounter.ElapsedMilliseconds > player.ActionTime()) {
 
@@ -32,10 +44,11 @@ namespace Game.Game_Animation_Classes {
                     } else if (player.isRunning) {
                         player.Action = ActionType.run;
                         player.X += (Input.D ? 6 : -4);
+                        if (Input.A) {  
+                        }
                     } else if (player.isCrouchWalking) {
                         player.Action = ActionType.crouchwalk;
-                        player.X += 4;
-
+                        player.X += (Input.D ? 4 : -4);
                     } else if (player.isJumping && !player.isFalling) {
                         player.Action = ActionType.jump;
                         player.Frame = 0;

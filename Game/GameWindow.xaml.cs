@@ -62,7 +62,8 @@ namespace Game {
                 Scene.Children.Add(block);
             }
 
-
+            
+            
             Scene.Children.Add(player);
             Scene.Children.Add(player.HitBoxRender);
             Scene.Children.Add(TopWall.HitBoxRender);
