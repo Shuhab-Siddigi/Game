@@ -17,6 +17,8 @@ namespace Game {
         die,
         jump,
         crouch,
+        fall,
+        crouchwalk,
     }
 
     class Player : Image {
@@ -25,8 +27,6 @@ namespace Game {
 
         public double X { get; set; } = 0; // Position X
         public double Y {get; set;} = 0;   // Position Y 
-
-
         
         private static Dictionary<ActionType, List<BitmapImage>> Sources = new Dictionary<ActionType, List<BitmapImage>>();
 
@@ -41,8 +41,12 @@ namespace Game {
         public bool isRunning { get; set; } = false;
         public bool isJumping { get; set; } = false;
         public bool isCrouching { get; set; } = false;
+        public bool isCrouchWalking { get; set; } = false;
         public bool isBlockedLeft { get; set; } = false;
         public bool isBlockedRight { get; set; } = false;
+        public bool isBlockedBellow { get; set; } = false;
+        public bool isBlockedAbove { get; set; } = false;
+        
 
 
 
@@ -54,6 +58,8 @@ namespace Game {
             {ActionType.crouch, 4},
             {ActionType.walk,    6},
             {ActionType.run,    6},
+            {ActionType.fall,    2},
+            {ActionType.crouchwalk, 6},
         };
 
         // Define size of player 
@@ -97,6 +103,8 @@ namespace Game {
                 ActionType.die => this.Frame % 4,
                 ActionType.jump => this.Frame % 4,
                 ActionType.crouch => this.Frame % 4,
+                ActionType.crouchwalk => this.Frame % 6,
+                ActionType.fall => this.Frame % 2,
                 _ => this.Frame % 4,
             };
 
@@ -110,8 +118,10 @@ namespace Game {
                 ActionType.walk   =>    80,
                 ActionType.run    =>    80,
                 ActionType.die    =>    70,
-                ActionType.jump   =>    120,
+                ActionType.jump   =>    100,
                 ActionType.crouch =>    250,
+                ActionType.crouchwalk=> 250,
+                ActionType.fall   =>    60,
                 _                 =>    200,
             };
 
@@ -134,9 +144,18 @@ namespace Game {
         }
 
         public void DefaultSettings() {
-            this.isFalling = true;
+            this.isWalking = false;
+            this.isRunning = false;
+            this.isJumping = false;
+            this.isCrouching = false;
             this.isBlockedLeft = false;
             this.isBlockedRight = false;
+            this.isBlockedBellow = false;
+            this.isBlockedAbove = false;
+            this.isCrouchWalking = false;
+
+            this.isFalling = true;
+
             HitBoxRender.Stroke = Brushes.Black;
         }
 

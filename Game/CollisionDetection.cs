@@ -65,32 +65,33 @@ namespace Game {
             if (EdgeHit[CollisionEdge.Below]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 block.HitBoxRender.Stroke = Brushes.Red;
-            //    Trace.WriteLine("Below");
+                player.isBlockedAbove = true;
+                //    Trace.WriteLine("Below");
             }
             if (EdgeHit[CollisionEdge.Above]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 block.HitBoxRender.Stroke = Brushes.Red;
-                player.isFalling = false;
-               // Trace.WriteLine("Above");
+                player.isBlockedBellow = true;
+                // Trace.WriteLine("Above Block");
             }
             if (EdgeHit[CollisionEdge.Left]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 block.HitBoxRender.Stroke = Brushes.Red;
-               // player.isBlockedLeft = true;
-             //   Trace.WriteLine("Left");
+                player.isBlockedLeft = true;
+                // Trace.WriteLine("Left Block");
             }
             if (EdgeHit[CollisionEdge.Right]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 block.HitBoxRender.Stroke = Brushes.Red;
-           //     player.isBlockedRight = true;
-           //     Trace.WriteLine("Right");
+                player.isBlockedRight = true;
+                // Trace.WriteLine("Right Block");
                 
             }
             
         }
 
         public void WallCollision(Player player,Wall wall) {
-
+           
             // Change parameters so it checks if the player is intersecting with the box
             // And not the other way around.
             Dictionary<CollisionEdge, bool> EdgeHit = CollisionPoint(wall.WallHitBox, player.HitBox);
@@ -98,26 +99,26 @@ namespace Game {
             if (EdgeHit[CollisionEdge.Below]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 wall.HitBoxRender.Stroke = Brushes.Red;
-                Trace.WriteLine("Wall Hit Below");
-            }
+                player.isBlockedAbove = true;
+                 Trace.WriteLine("Wall Below");
+            } 
             if (EdgeHit[CollisionEdge.Above]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 wall.HitBoxRender.Stroke = Brushes.Red;
-                player.isFalling = false;
-                Trace.WriteLine("Above");
-            }
+                player.isBlockedBellow = true;
+                 Trace.WriteLine(" Wall Above");
+            } 
             if (EdgeHit[CollisionEdge.Left]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 wall.HitBoxRender.Stroke = Brushes.Red;
-                // player.isBlockedLeft = true;
-                Trace.WriteLine("Left");
-            }
+                player.isBlockedRight = true;
+                 Trace.WriteLine(" Wall Left");
+            } 
             if (EdgeHit[CollisionEdge.Right]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 wall.HitBoxRender.Stroke = Brushes.Red;
-                //     player.isBlockedRight = true;
-                Trace.WriteLine("Right");
-
+                player.isBlockedLeft = true;
+                 Trace.WriteLine(" Wall Right");
             }
 
         }

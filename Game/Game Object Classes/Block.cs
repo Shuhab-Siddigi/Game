@@ -75,7 +75,7 @@ namespace Game  {
         public void Update(Player player) {
             this.CollisionBox();
             this.CollisionBoxRender();
-            controls.BlockPosition(this,player);
+            controls.Movement(this,player);
             Canvas.SetLeft(this, this.X); // position X of player
             Canvas.SetTop(this, this.Y);  // position Y of player
         }

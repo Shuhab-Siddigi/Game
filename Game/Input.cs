@@ -19,30 +19,33 @@ namespace Game {
         public static void Update() {
             if (Keyboard.IsKeyDown(Key.W)) {
                 D = true;
-                Trace.WriteLine("W");
+               // Trace.WriteLine("W");
             } else D = false;
             if (Keyboard.IsKeyDown(Key.A)) {
                 A = true;
-                Trace.WriteLine("A");
+               // Trace.WriteLine("A");
             } else A = false;
             if (Keyboard.IsKeyDown(Key.S)) {
                 S = true;
-                Trace.WriteLine("S");
+               // Trace.WriteLine("S");
             } else S = false;
             if (Keyboard.IsKeyDown(Key.D)) {
                 D = true;
-                Trace.WriteLine("D");
+               //  Trace.WriteLine("D"); 
             } else D = false;
             if (Keyboard.IsKeyDown(Key.Space)) {
                 Space = true;
-                Trace.WriteLine("Space");
+               // Trace.WriteLine("Space");
             } else Space = false;
             if (Keyboard.IsKeyDown(Key.LeftShift)) {
                 Shift = true;
-                Trace.WriteLine("Shift");
+               // Trace.WriteLine("Shift");
             } else Shift = false;
+
+      
+
         }
-        
+
 
 
     }

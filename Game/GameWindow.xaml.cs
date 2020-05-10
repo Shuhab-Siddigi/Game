@@ -12,17 +12,19 @@ using Game.Game_Object_Classes;
 
 namespace Game {
 
-  
+    
 
     public partial class GameWindow : Window {
-
+       
         CollisionDetection collision = new CollisionDetection();
-        Player player = new Player(10,100,50,50);
+        Player player = new Player(10,450,50,50);
         Wall TopWall = new Wall(Block.blocksize*0, Block.blocksize*0, 39, 1);
         Wall BottomWall = new Wall(Block.blocksize * 0, Block.blocksize * 29, 39, 1);
         Wall LeftWall = new Wall(Block.blocksize * 0, Block.blocksize * 0, 1, 30);
         Wall RightWall = new Wall(Block.blocksize * 38, Block.blocksize * 0, 1, 30);
+       
 
+       
 
 
         public GameWindow() {
@@ -42,7 +44,7 @@ namespace Game {
             Window.Height = GlobalSettings.ScreenHeight-1;
             
             // Add objects to the screen
-           
+            
             
             foreach (Block block in TopWall) {
                 Scene.Children.Add(block);
@@ -60,8 +62,8 @@ namespace Game {
                 Scene.Children.Add(block);
             }
 
-            Scene.Children.Add(player);
 
+            Scene.Children.Add(player);
             Scene.Children.Add(player.HitBoxRender);
             Scene.Children.Add(TopWall.HitBoxRender);
             Scene.Children.Add(BottomWall.HitBoxRender);
@@ -71,14 +73,15 @@ namespace Game {
         }
 
         private void OnUpdate(object sender, EventArgs e) {
-            Input.Update();
-            player.DefaultSettings();
 
-         
+            
+
+            Input.Update();
+            player.DefaultSettings(); 
             TopWall.Update(player);
             BottomWall.Update(player);  
             LeftWall.Update(player);       
-            RightWall.Update(player);       
+            RightWall.Update(player);
             player.Update();
 
 
