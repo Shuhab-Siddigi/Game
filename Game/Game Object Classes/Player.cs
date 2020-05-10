@@ -46,7 +46,8 @@ namespace Game {
         public bool isBlockedRight { get; set; } = false;
         public bool isBlockedBellow { get; set; } = false;
         public bool isBlockedAbove { get; set; } = false;
-        
+        public bool isRight { get; set; } = false;
+
 
 
 
@@ -118,7 +119,7 @@ namespace Game {
                 ActionType.walk   =>    80,
                 ActionType.run    =>    80,
                 ActionType.die    =>    70,
-                ActionType.jump   =>    100,
+                ActionType.jump   =>    60,
                 ActionType.crouch =>    250,
                 ActionType.crouchwalk=> 250,
                 ActionType.fall   =>    60,

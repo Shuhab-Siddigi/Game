@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
+﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Game.Game_Animation_Classes {
@@ -20,34 +16,51 @@ namespace Game.Game_Animation_Classes {
         public void PlayerAnimation(Player player, Rect Hitbox, System.Windows.Shapes.Rectangle HitBoxRender) {
 
             FlipPlayer(player, Hitbox, HitBoxRender);
+            
 
             if (PlayerFrameCounter.ElapsedMilliseconds > player.ActionTime()) {
+                
+                if (LockFrame == 0) {
 
-                if(LockFrame == 0) { 
+                   
 
                     if (player.isFalling) {
                         player.Action = ActionType.fall;
-                        player.Y += 3;
-                        if(Input.D || Input.A) {
+                        player.Y += 7;
+                        
+                        if (Input.D && !player.isBlockedRight) {
                             player.Y += 1;
-                            player.X += (Input.D ? 2 : -2);
-                        }
-
+                            player.X += 10;
+                        } else if (Input.A && !player.isBlockedLeft) {
+                            player.Y += 1;
+                            player.X -= 10;
+                        } 
+                        
                     } else if (player.isRunning) {
                         player.Action = ActionType.run;
-                        player.X += (Input.D ? 6 : -4);
-                        if (Input.A) {  
+                        if(Input.D && !player.isBlockedRight) {
+                            player.X += 6;
+                        } else if ( Input.A && !player.isBlockedLeft) {
+                            player.X -= 6;
                         }
                     } else if (player.isCrouchWalking) {
                         player.Action = ActionType.crouchwalk;
-                        player.X += (Input.D ? 4 : -4);
+                        if (Input.D && !player.isBlockedRight) {
+                            player.X += 4;
+                        } else if (Input.A && !player.isBlockedLeft) {
+                            player.X -= 4;
+                        }
                     } else if (player.isJumping && !player.isFalling) {
                         player.Action = ActionType.jump;
                         player.Frame = 0;
-                        LockFrame = 3;
+                        LockFrame = 10;
                     } else if (player.isWalking) {
                         player.Action = ActionType.walk;
-                        player.X += (Input.D ? 3 : -2);
+                        if (Input.D && !player.isBlockedRight) {
+                            player.X += 3;
+                        } else if (Input.A && !player.isBlockedLeft) {
+                            player.X -= 3;
+                        }
                     }  else if (player.isCrouching) {
                         player.Action = ActionType.crouch;
                     
@@ -57,22 +70,29 @@ namespace Game.Game_Animation_Classes {
                 
                 } else {
                     LockFrame--;
+                    if(player.Frame > 2) {
+                        player.Frame = 3;
+                    }
+                   
                 }
 
-                if (player.Action == ActionType.jump) {
-                    player.Y -= 9;
-                    if (Input.D || Input.A) {
-                        player.X += (Input.D ? 2 : -2);
+                if (player.Action == ActionType.jump && !player.isBlockedAbove) {
+                    player.Y -= 10;
+                    if (Input.D && !player.isBlockedRight) {
+                        player.X += 9;
+                    } else if (Input.A && !player.isBlockedLeft) {
+                        player.X -= 9;
                     }
+                } else if (player.isBlockedAbove) {
+                    player.isFalling = true;
+                    LockFrame = 0;
                 }
 
                
 
-                // Setting the PNG to the player
                 player.SetSource();
-                // Next Player Frame 
                 player.Frame += 1;
-                // Movement for the player on the Canvas
+                
                 PlayerFrameCounter.Restart();
             }
         }
@@ -102,13 +122,13 @@ namespace Game.Game_Animation_Classes {
 
         private void FlipPlayer(Player player, Rect Hitbox, System.Windows.Shapes.Rectangle HitBoxRender) {
             // Inverts Image 
-            if (Input.A) {
+            if (!player.isRight) {
                 player.RenderTransformOrigin = new Point(0.5, 0.5);
                 ScaleTransform flippedPlayer = new ScaleTransform(-1, 1);
                 player.RenderTransform = flippedPlayer;
                 // Move Hitbox -10 px
-                player.HitBox.X = player.HitBox.X-10;
-                Canvas.SetLeft(player.HitBoxRender,Canvas.GetLeft(player.HitBoxRender)-10);
+                player.HitBox.X = player.HitBox.X-7;
+                Canvas.SetLeft(player.HitBoxRender,Canvas.GetLeft(player.HitBoxRender)-7);
                 
             } else {
                 player.RenderTransformOrigin = new Point(0.5, 0.5);

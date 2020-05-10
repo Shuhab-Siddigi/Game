@@ -4,10 +4,6 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Shapes;
-using System.Windows.Media.Imaging;
-using System.Numerics;
-using System.Windows;
 using Game.Game_Object_Classes;
 
 namespace Game {
@@ -36,14 +32,11 @@ namespace Game {
                     { CollisionEdge.Left,    false },
                 };
             }
-
-           
-
-            bool Above = player.Top == intersection.Top;
+            
             bool Below = player.Bottom == intersection.Bottom;
-            bool Right = player.Right == intersection.Right && !Above;
-            bool Left = player.Left == intersection.Left && !Above;
-
+            bool Right = player.Right == intersection.Right;
+            bool Left = player.Left == intersection.Left;
+            bool Above = player.Top == intersection.Top;
 
             return new Dictionary<CollisionEdge, bool>() {
                 { CollisionEdge.Above,   Above },
@@ -54,7 +47,6 @@ namespace Game {
 
         }
 
-       
 
         public void BlockCollision(Player player, Block block) {
             
@@ -100,13 +92,13 @@ namespace Game {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 wall.HitBoxRender.Stroke = Brushes.Red;
                 player.isBlockedAbove = true;
-                 Trace.WriteLine("Wall Below");
+                //Trace.WriteLine("Wall Below");
             } 
             if (EdgeHit[CollisionEdge.Above]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 wall.HitBoxRender.Stroke = Brushes.Red;
                 player.isBlockedBellow = true;
-                 Trace.WriteLine(" Wall Above");
+                // Trace.WriteLine(" Wall Above");
             } 
             if (EdgeHit[CollisionEdge.Left]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
@@ -118,9 +110,16 @@ namespace Game {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 wall.HitBoxRender.Stroke = Brushes.Red;
                 player.isBlockedLeft = true;
-                 Trace.WriteLine(" Wall Right");
+                Trace.WriteLine(" Wall Right");
             }
 
+         
+          
+    
+
+            
+
+            
         }
 
 

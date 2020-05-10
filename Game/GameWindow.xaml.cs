@@ -22,11 +22,7 @@ namespace Game {
         Wall BottomWall = new Wall(Block.blocksize * 0, Block.blocksize * 29, 39, 1);
         Wall LeftWall = new Wall(Block.blocksize * 0, Block.blocksize * 0, 1, 30);
         Wall RightWall = new Wall(Block.blocksize * 38, Block.blocksize * 0, 1, 30);
-       
-
-       
-
-
+        Wall MidWall1 = new Wall(Block.blocksize * 28, Block.blocksize * 27, 5, 1);
         public GameWindow() {
 
             InitializeComponent();
@@ -62,33 +58,42 @@ namespace Game {
                 Scene.Children.Add(block);
             }
 
-            
-            
+            foreach (Block block in MidWall1) {
+                Scene.Children.Add(block);
+            }
+
+
             Scene.Children.Add(player);
             Scene.Children.Add(player.HitBoxRender);
             Scene.Children.Add(TopWall.HitBoxRender);
             Scene.Children.Add(BottomWall.HitBoxRender);
             Scene.Children.Add(LeftWall.HitBoxRender);
             Scene.Children.Add(RightWall.HitBoxRender);
+            Scene.Children.Add(MidWall1.HitBoxRender);
 
         }
 
         private void OnUpdate(object sender, EventArgs e) {
 
-            
 
+            
             Input.Update();
             player.DefaultSettings(); 
             TopWall.Update(player);
             BottomWall.Update(player);  
             LeftWall.Update(player);       
             RightWall.Update(player);
+            MidWall1.Update(player);
             player.Update();
-
+            Trace.WriteLine("Mid Wall X = "+MidWall1.WallHitBox.X);
+            Trace.WriteLine("Mid Wall Y = " + MidWall1.WallHitBox.Y);
+            Trace.WriteLine("Player X = " + player.X);
+            Trace.WriteLine("Player Y = " + player.Y);
 
         }
 
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
 
-
+        }
     }
 }

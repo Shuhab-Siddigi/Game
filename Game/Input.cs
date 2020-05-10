@@ -18,9 +18,9 @@ namespace Game {
 
         public static void Update() {
             if (Keyboard.IsKeyDown(Key.W)) {
-                D = true;
+                W = true;
                // Trace.WriteLine("W");
-            } else D = false;
+            } else W = false;
             if (Keyboard.IsKeyDown(Key.A)) {
                 A = true;
                // Trace.WriteLine("A");

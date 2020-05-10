@@ -3,7 +3,6 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Numerics;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
