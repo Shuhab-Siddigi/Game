@@ -138,7 +138,6 @@ namespace Game {
         public void CollisionBoxRender() {
             HitBoxRender.Width = this.HitBox.Width;
             HitBoxRender.Height = this.HitBox.Height;
-   
             Canvas.SetLeft(HitBoxRender, HitBox.X);
             Canvas.SetTop(HitBoxRender, HitBox.Y);         
         }
@@ -164,7 +163,7 @@ namespace Game {
             Canvas.SetTop(this, this.Y);  // position Y of player
             this.CollisionBox();
             this.CollisionBoxRender();
-            playercontrols.Movement(this);
+            playercontrols.Movement(this, HitBox, HitBoxRender);
             // If the player is not touching anything
             
         }

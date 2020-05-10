@@ -17,17 +17,9 @@ namespace Game.Game_Animation_Classes {
             BlockFrameCounter.Start();
         }
 
-        public void PlayerAnimation(Player player) {
+        public void PlayerAnimation(Player player, Rect Hitbox, System.Windows.Shapes.Rectangle HitBoxRender) {
 
-            if (Input.A) { 
-            player.RenderTransformOrigin = new Point(0.5, 0.5);
-            ScaleTransform flippedPlayer = new ScaleTransform(-1, 1);
-            player.RenderTransform = flippedPlayer;
-            } else {
-                player.RenderTransformOrigin = new Point(0.5, 0.5);
-                ScaleTransform flippedPlayer = new ScaleTransform(1, 1);
-                player.RenderTransform = flippedPlayer;
-            }
+            FlipPlayer(player, Hitbox, HitBoxRender);
 
             if (PlayerFrameCounter.ElapsedMilliseconds > player.ActionTime()) {
 
@@ -106,6 +98,23 @@ namespace Game.Game_Animation_Classes {
 
 
 
+        }
+
+        private void FlipPlayer(Player player, Rect Hitbox, System.Windows.Shapes.Rectangle HitBoxRender) {
+            // Inverts Image 
+            if (Input.A) {
+                player.RenderTransformOrigin = new Point(0.5, 0.5);
+                ScaleTransform flippedPlayer = new ScaleTransform(-1, 1);
+                player.RenderTransform = flippedPlayer;
+                // Move Hitbox -10 px
+                player.HitBox.X = player.HitBox.X-10;
+                Canvas.SetLeft(player.HitBoxRender,Canvas.GetLeft(player.HitBoxRender)-10);
+                
+            } else {
+                player.RenderTransformOrigin = new Point(0.5, 0.5);
+                ScaleTransform flippedPlayer = new ScaleTransform(1, 1);
+                player.RenderTransform = flippedPlayer;
+            }
         }
     }
 }

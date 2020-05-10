@@ -1,17 +1,14 @@
 ﻿using Game.Game_Animation_Classes;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
-using System.Windows.Controls;
-using System.Windows.Input;
+using System.Drawing;
+using System.Windows;
+
 
 namespace Game {
     class PlayerControls {
         
         Animation animation = new Animation();
 
-        public void Movement(Player player) {
+        public void Movement(Player player,Rect Hitbox, System.Windows.Shapes.Rectangle HitBoxRender) {
 
             if (player.isBlockedBellow) {
                 player.isFalling = false;
@@ -33,7 +30,7 @@ namespace Game {
                 player.isIdle = true;
             }
 
-            animation.PlayerAnimation(player);
+            animation.PlayerAnimation(player,Hitbox,HitBoxRender);
 
         }
 
