@@ -164,8 +164,8 @@ namespace Game {
             Canvas.SetTop(this, this.Y);  // position Y of player
             this.CollisionBox();
             this.CollisionBoxRender();
-            playercontrols.Movement(this, HitBox, HitBoxRender);
-            // If the player is not touching anything
+            playercontrols.Movement(this);
+            
             
         }
 

@@ -12,7 +12,6 @@ namespace Game {
 
     class CollisionDetection {
 
-     
 
         public enum CollisionEdge {
             Above = 0,
@@ -23,20 +22,11 @@ namespace Game {
 
         public Dictionary<CollisionEdge, bool> CollisionPoint(Rect player, Rect rect) {
 
-            Rect intersection = Rect.Intersect(player, rect);
-            if (intersection.IsEmpty) {
-                return new Dictionary<CollisionEdge, bool>() {
-                    { CollisionEdge.Above,   false },
-                    { CollisionEdge.Below,   false },
-                    { CollisionEdge.Right,   false },
-                    { CollisionEdge.Left,    false },
-                };
-            }
-            
-            bool Below = player.Bottom == intersection.Bottom;
-            bool Right = player.Right == intersection.Right;
-            bool Left = player.Left == intersection.Left;
-            bool Above = player.Top == intersection.Top;
+
+            bool Below = (player.Bottom >= rect.Top) && (player.Bottom <= rect.Top+10)  && (player.Right >= rect.Left) && (player.Left <= rect.Right); 
+            bool Above = (player.Top >= rect.Bottom-10) && (player.Top <= rect.Bottom ) && (player.Right >= rect.Left) && (player.Left <= rect.Right);
+            bool Right = (player.Right >= rect.Left) && (player.Right <= rect.Left + 10) && (player.Bottom >= rect.Top) && (player.Top <= rect.Bottom) && (!Below && !Above);
+            bool Left = (player.Left >= rect.Right - 10) && (player.Left <= rect.Right) && (player.Bottom >= rect.Top) && (player.Top <= rect.Bottom)  && (!Below && !Above);
 
             return new Dictionary<CollisionEdge, bool>() {
                 { CollisionEdge.Above,   Above },
@@ -50,20 +40,19 @@ namespace Game {
 
         public void BlockCollision(Player player, Block block) {
             
-            // Change parameters so it checks if the player is intersecting with the box
-            // And not the other way around.
-            Dictionary<CollisionEdge,bool> EdgeHit = CollisionPoint(block.HitBox,player.HitBox);
-
+            
+            Dictionary<CollisionEdge,bool> EdgeHit = CollisionPoint(player.HitBox, block.HitBox);
+            
             if (EdgeHit[CollisionEdge.Below]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 block.HitBoxRender.Stroke = Brushes.Red;
-                player.isBlockedAbove = true;
+                player.isBlockedBellow = true;
                 //    Trace.WriteLine("Below");
             }
             if (EdgeHit[CollisionEdge.Above]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 block.HitBoxRender.Stroke = Brushes.Red;
-                player.isBlockedBellow = true;
+                player.isBlockedAbove = true;
                 // Trace.WriteLine("Above Block");
             }
             if (EdgeHit[CollisionEdge.Left]) {
@@ -76,6 +65,8 @@ namespace Game {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 block.HitBoxRender.Stroke = Brushes.Red;
                 player.isBlockedRight = true;
+             
+                
                 // Trace.WriteLine("Right Block");
                 
             }
@@ -84,40 +75,34 @@ namespace Game {
 
         public void WallCollision(Player player,Wall wall) {
            
-            // Change parameters so it checks if the player is intersecting with the box
-            // And not the other way around.
-            Dictionary<CollisionEdge, bool> EdgeHit = CollisionPoint(wall.WallHitBox, player.HitBox);
-
+            Dictionary<CollisionEdge, bool> EdgeHit = CollisionPoint(player.HitBox, wall.WallHitBox );
             if (EdgeHit[CollisionEdge.Below]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 wall.HitBoxRender.Stroke = Brushes.Red;
-                player.isBlockedAbove = true;
-                //Trace.WriteLine("Wall Below");
+                player.isBlockedBellow = true;
+               // Trace.WriteLine("Wall Below");
             } 
             if (EdgeHit[CollisionEdge.Above]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 wall.HitBoxRender.Stroke = Brushes.Red;
-                player.isBlockedBellow = true;
+                player.isBlockedAbove = true;
+                
                 // Trace.WriteLine(" Wall Above");
             } 
             if (EdgeHit[CollisionEdge.Left]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 wall.HitBoxRender.Stroke = Brushes.Red;
-                player.isBlockedRight = true;
-                 Trace.WriteLine(" Wall Left");
+                player.isBlockedLeft = true;
+                // Trace.WriteLine(" Wall Left");
             } 
             if (EdgeHit[CollisionEdge.Right]) {
                 player.HitBoxRender.Stroke = Brushes.Red;
                 wall.HitBoxRender.Stroke = Brushes.Red;
-                player.isBlockedLeft = true;
-                Trace.WriteLine(" Wall Right");
+                player.isBlockedRight = true;
+              
+                // Trace.WriteLine(" Wall Right");
             }
-
-         
-          
-    
-
-            
+ 
 
             
         }

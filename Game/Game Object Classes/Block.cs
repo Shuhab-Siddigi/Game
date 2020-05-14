@@ -45,7 +45,7 @@ namespace Game  {
             string path = Environment.CurrentDirectory;
 
             foreach (BlockType type in Enum.GetValues(typeof(BlockType))) {
-                Trace.WriteLine(type.ToString());
+              
                 Block.Sources.Add(type, new BitmapImage(
                      new Uri(string.Format(@"{0}\Blocks\block-{1}.png", path, type.ToString()))
                 ));

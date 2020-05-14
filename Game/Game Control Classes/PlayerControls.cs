@@ -5,9 +5,9 @@ using System.Windows;
 namespace Game {
     class PlayerControls {
         
-        Animation animation = new Animation();
+        PlayerAnimation playerAnimation = new PlayerAnimation();
 
-        public void Movement(Player player,Rect Hitbox, System.Windows.Shapes.Rectangle HitBoxRender) {
+        public void Movement(Player player) {
 
             if (player.isBlockedBellow) {
                 player.isFalling = false;
@@ -33,7 +33,8 @@ namespace Game {
                 player.isIdle = true;
             }
 
-            animation.PlayerAnimation(player,Hitbox,HitBoxRender);
+            //playerAnimation.GODMODE(player);
+            playerAnimation.Animation(player);
 
         }
 

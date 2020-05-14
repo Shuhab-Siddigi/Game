@@ -12,17 +12,19 @@ using Game.Game_Object_Classes;
 
 namespace Game {
 
-    
-
     public partial class GameWindow : Window {
        
         CollisionDetection collision = new CollisionDetection();
+
+
+        Slime slime = new Slime(500,550,25,25);
         Player player = new Player(10,450,50,50);
         Wall TopWall = new Wall(Block.blocksize*0, Block.blocksize*0, 39, 1);
         Wall BottomWall = new Wall(Block.blocksize * 0, Block.blocksize * 29, 39, 1);
         Wall LeftWall = new Wall(Block.blocksize * 0, Block.blocksize * 0, 1, 30);
         Wall RightWall = new Wall(Block.blocksize * 38, Block.blocksize * 0, 1, 30);
         Wall MidWall1 = new Wall(Block.blocksize * 28, Block.blocksize * 27, 5, 1);
+      
         public GameWindow() {
 
             InitializeComponent();
@@ -38,39 +40,16 @@ namespace Game {
             Scene.Height = GlobalSettings.ScreenHeight;
             Window.Width = GlobalSettings.ScreenWidth-4;
             Window.Height = GlobalSettings.ScreenHeight-1;
-            
+
             // Add objects to the screen
+           
+            AddPlayer(player);
+            AddWall(TopWall);
+            AddWall(BottomWall);
+            AddWall(LeftWall);
+            AddWall(RightWall);
+            AddWall(MidWall1);
             
-            
-            foreach (Block block in TopWall) {
-                Scene.Children.Add(block);
-            }
-                       
-            foreach (Block block in BottomWall) {
-                Scene.Children.Add(block);
-            }
-            
-            foreach (Block block in LeftWall) {
-                Scene.Children.Add(block);
-            }
-            
-            foreach (Block block in RightWall) {
-                Scene.Children.Add(block);
-            }
-
-            foreach (Block block in MidWall1) {
-                Scene.Children.Add(block);
-            }
-
-
-            Scene.Children.Add(player);
-            Scene.Children.Add(player.HitBoxRender);
-            Scene.Children.Add(TopWall.HitBoxRender);
-            Scene.Children.Add(BottomWall.HitBoxRender);
-            Scene.Children.Add(LeftWall.HitBoxRender);
-            Scene.Children.Add(RightWall.HitBoxRender);
-            Scene.Children.Add(MidWall1.HitBoxRender);
-
         }
 
         private void OnUpdate(object sender, EventArgs e) {
@@ -78,6 +57,8 @@ namespace Game {
 
             
             Input.Update();
+
+           slime.DefaultSettings();
             player.DefaultSettings(); 
             TopWall.Update(player);
             BottomWall.Update(player);  
@@ -85,15 +66,33 @@ namespace Game {
             RightWall.Update(player);
             MidWall1.Update(player);
             player.Update();
-            Trace.WriteLine("Mid Wall X = "+MidWall1.WallHitBox.X);
-            Trace.WriteLine("Mid Wall Y = " + MidWall1.WallHitBox.Y);
-            Trace.WriteLine("Player X = " + player.X);
-            Trace.WriteLine("Player Y = " + player.Y);
+            slime.Update();
 
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
-
+        private void AddWall(Wall wall) {
+           
+            foreach (Block block in wall) {
+                Scene.Children.Add(block);
+            }
+            Scene.Children.Add(wall.HitBoxRender);
         }
+
+        private void AddPlayer(Player player) {
+            Scene.Children.Add(player);
+            Scene.Children.Add(player.HitBoxRender);
+        }
+
+        private void AddBlock(Block block) {
+            Scene.Children.Add(block);
+            Scene.Children.Add(block.HitBoxRender);
+        }
+
+        private void AddSlime(Slime slime) {
+            Scene.Children.Add(slime);
+            Scene.Children.Add(slime.HitBoxRender);
+        }
+
+       
     }
 }

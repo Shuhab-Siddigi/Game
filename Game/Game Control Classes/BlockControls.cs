@@ -6,7 +6,8 @@ using System.Windows.Input;
 namespace Game {
     class BlockControls {
 
-        Animation animation = new Animation();
+      
+        BlockAnimations BlockAnimations = new BlockAnimations();
 
         public void Movement(Block block,Player player) {
             
@@ -22,7 +23,7 @@ namespace Game {
 
                 }
 
-                animation.BlockAnimation(block, player);
+                BlockAnimations.Animation(block, player);
                 
         }
     }
