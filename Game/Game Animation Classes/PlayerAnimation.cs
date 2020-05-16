@@ -27,7 +27,7 @@ namespace Game.Game_Animation_Classes {
                 if (LockFrame == 0) {
 
                     if (player.isFalling) {
-                        player.Action = ActionType.fall;
+                        player.Action = PlayerActionType.fall;
                         player.Y += 9;
 
 
@@ -42,35 +42,35 @@ namespace Game.Game_Animation_Classes {
                         }
 
                     } else if (player.isRunning) {
-                        player.Action = ActionType.run;
+                        player.Action = PlayerActionType.run;
                         if (Input.D && !player.isBlockedRight) {
                             player.X += 6;
                         } else if (Input.A && !player.isBlockedLeft) {
                             player.X -= 6;
                         }
                     } else if (player.isCrouchWalking) {
-                        player.Action = ActionType.crouchwalk;
+                        player.Action = PlayerActionType.crouchwalk;
                         if (Input.D && !player.isBlockedRight) {
                             player.X += 4;
                         } else if (Input.A && !player.isBlockedLeft) {
                             player.X -= 4;
                         }
                     } else if (player.isJumping && !player.isFalling) {
-                        player.Action = ActionType.jump;
+                        player.Action = PlayerActionType.jump;
                         player.Frame = 0;
                         LockFrame = 10;
                     } else if (player.isWalking) {
-                        player.Action = ActionType.walk;
+                        player.Action = PlayerActionType.walk;
                         if (Input.D && !player.isBlockedRight) {
                             player.X += 3;
                         } else if (Input.A && !player.isBlockedLeft) {
                             player.X -= 3;
                         }
                     } else if (player.isCrouching) {
-                        player.Action = ActionType.crouch;
+                        player.Action = PlayerActionType.crouch;
 
                     } else {
-                        player.Action = ActionType.idle;
+                        player.Action = PlayerActionType.idle;
                     }
 
                 } else {
@@ -81,7 +81,7 @@ namespace Game.Game_Animation_Classes {
 
                 }
 
-                if (player.Action == ActionType.jump && !player.isBlockedAbove) {
+                if (player.Action == PlayerActionType.jump && !player.isBlockedAbove) {
                     player.Y -= 7;
 
                     if (Input.D && !player.isBlockedRight) {
@@ -125,19 +125,19 @@ namespace Game.Game_Animation_Classes {
 
         public void GODMODE(Player player) {
             if (Input.D) {
-                player.Action = ActionType.idle;
+                player.Action = PlayerActionType.idle;
                 player.X += 2;
             }
             if (Input.A) {
-                player.Action = ActionType.idle;
+                player.Action = PlayerActionType.idle;
                 player.X -= 2;
             }
             if (Input.S) {
-                player.Action = ActionType.idle;
+                player.Action = PlayerActionType.idle;
                 player.Y += 2;
             }
             if (Input.W) {
-                player.Action = ActionType.idle;
+                player.Action = PlayerActionType.idle;
                 player.Y -= 2;
             }
             player.SetSource();

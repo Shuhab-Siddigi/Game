@@ -17,7 +17,7 @@ namespace Game {
         CollisionDetection collision = new CollisionDetection();
 
 
-        Slime slime = new Slime(500,550,25,25);
+        Slime slime = new Slime(100,150,50,50);
         Player player = new Player(10,450,50,50);
         Wall TopWall = new Wall(Block.blocksize*0, Block.blocksize*0, 39, 1);
         Wall BottomWall = new Wall(Block.blocksize * 0, Block.blocksize * 29, 39, 1);
@@ -25,11 +25,17 @@ namespace Game {
         Wall RightWall = new Wall(Block.blocksize * 38, Block.blocksize * 0, 1, 30);
 
 
-        Wall MidWall1 = new Wall(Block.blocksize * 10, Block.blocksize * 25, 5, 1);
-        Wall MidWall2 = new Wall(Block.blocksize * 28, Block.blocksize * 27, 5, 1);
-        Wall MidWall3 = new Wall(Block.blocksize * 2, Block.blocksize * 22, 5, 1);
-        Wall MidWall4 = new Wall(Block.blocksize * 14, Block.blocksize * 19, 5, 1);
-        Wall MidWall5 = new Wall(Block.blocksize * 20, Block.blocksize * 23, 5, 1);
+        Wall MidWall1 = new Wall(Block.blocksize * 3, Block.blocksize * 26, 6, 1);
+        Wall MidWall2 = new Wall(Block.blocksize * 23, Block.blocksize * 20, 1, 5);
+        Wall MidWall3 = new Wall(Block.blocksize * 12, Block.blocksize * 26, 6, 1);
+        Wall MidWall4 = new Wall(Block.blocksize * 9, Block.blocksize * 23, 6, 1);
+        Wall MidWall5 = new Wall(Block.blocksize * 20, Block.blocksize * 26, 6, 1);
+        Wall MidWall6 = new Wall(Block.blocksize * 17, Block.blocksize * 23, 6, 1);
+        Wall MidWall7 = new Wall(Block.blocksize * 1, Block.blocksize * 20, 28, 1);
+        Wall MidWall8 = new Wall(Block.blocksize * 11, Block.blocksize * 24 , 1, 5);
+        Wall MidWall9 = new Wall(Block.blocksize * 0, Block.blocksize * 0, 0, 0);
+        Wall MidWall10 = new Wall(Block.blocksize * 0, Block.blocksize * 0,0, 0);
+
 
 
         public GameWindow() {
@@ -49,7 +55,7 @@ namespace Game {
             Window.Height = GlobalSettings.ScreenHeight-1;
 
             // Add objects to the screen
-           
+            AddSlime(slime);
             AddPlayer(player);
             AddWall(TopWall);
             AddWall(BottomWall);
@@ -60,9 +66,11 @@ namespace Game {
             AddWall(MidWall3);
             AddWall(MidWall4);
             AddWall(MidWall5);
-
-            AddSlime(slime);
-            
+            AddWall(MidWall6);
+            AddWall(MidWall7);
+            AddWall(MidWall8);
+            AddWall(MidWall9);
+            AddWall(MidWall10);
         }
 
         private void OnUpdate(object sender, EventArgs e) {
@@ -84,9 +92,14 @@ namespace Game {
             MidWall3.Update(player, slime);
             MidWall4.Update(player, slime);
             MidWall5.Update(player, slime);
+            MidWall6.Update(player, slime);
+            MidWall7.Update(player, slime);
+            MidWall8.Update(player, slime);
+            MidWall9.Update(player, slime);
+            MidWall10.Update(player, slime);
+
             player.Update();
             slime.Update();
-
         }
 
         private void AddWall(Wall wall) {

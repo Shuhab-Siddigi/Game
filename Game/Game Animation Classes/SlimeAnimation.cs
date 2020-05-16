@@ -27,6 +27,20 @@ namespace Game.Game_Animation_Classes {
                 if (slime.isFalling) {
                     slime.Y += 4;
                 }
+                if (slime.isBlockedBellow) {
+                    if(!slime.isRight) {
+                        slime.X += 5;
+                        slime.Action = SlimeActionType.move;
+                    }else {
+                        slime.X -= 5;
+                        slime.Action = SlimeActionType.move;
+                    }
+                    if (slime.isBlockedLeft) {
+                        slime.isRight = false;
+                    }else if (slime.isBlockedRight) {
+                        slime.isRight = true;
+                    }
+                }
 
 
                 slime.SetSource();
@@ -43,8 +57,8 @@ namespace Game.Game_Animation_Classes {
                 ScaleTransform flippedPlayer = new ScaleTransform(-1, 1);
                 slime.RenderTransform = flippedPlayer;
                 // Move Hitbox -10 px
-                slime.HitBox.X = slime.HitBox.X - 7;
-                Canvas.SetLeft(slime.HitBoxRender, Canvas.GetLeft(slime.HitBoxRender) - 7);
+                slime.HitBox.X = slime.HitBox.X - 1;
+                Canvas.SetLeft(slime.HitBoxRender, Canvas.GetLeft(slime.HitBoxRender) - 1);
 
             } else {
                 slime.RenderTransformOrigin = new Point(0.5, 0.5);

@@ -38,7 +38,7 @@ namespace Game {
 
         }
 
-
+        /*
         public void BlockCollision(Player player, Block block) {
             
             
@@ -73,7 +73,7 @@ namespace Game {
             }
             
         }
-
+        */
         public void WallCollision<T>(GameObject<T> gameObject,Wall wall) {
            
             Dictionary<CollisionEdge, bool> EdgeHit = CollisionPoint(gameObject.HitBox, wall.WallHitBox );
@@ -98,9 +98,9 @@ namespace Game {
                 // Trace.WriteLine(" Wall Left");
             } 
             if (EdgeHit[CollisionEdge.Right]) {
-            
+                gameObject.HitBoxRender.Stroke = Brushes.Red;
+                wall.HitBoxRender.Stroke = Brushes.Red;
                 gameObject.isBlockedRight = true;
-              
                 // Trace.WriteLine(" Wall Right");
             }
            

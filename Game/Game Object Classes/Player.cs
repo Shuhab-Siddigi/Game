@@ -10,7 +10,7 @@ namespace Game {
 
 
 
-    enum ActionType {
+    enum PlayerActionType {
         idle,
         walk,
         run,
@@ -21,7 +21,7 @@ namespace Game {
         crouchwalk,
     }
 
-    class Player : GameObject<ActionType> {
+    class Player : GameObject<PlayerActionType> {
         
         
 
@@ -36,15 +36,15 @@ namespace Game {
 
 
         // Create a Dictionary to hold all frames for each Actions
-        private static Dictionary<ActionType, int> ActionTypeFrames = new Dictionary<ActionType, int>() {
-            {ActionType.idle,   4},
-            {ActionType.die,    4},
-            {ActionType.jump,   4},
-            {ActionType.crouch, 4},
-            {ActionType.walk,    6},
-            {ActionType.run,    6},
-            {ActionType.fall,    2},
-            {ActionType.crouchwalk, 6},
+        private static Dictionary<PlayerActionType, int> ActionTypeFrames = new Dictionary<PlayerActionType, int>() {
+            {PlayerActionType.idle,   4},
+            {PlayerActionType.die,    4},
+            {PlayerActionType.jump,   4},
+            {PlayerActionType.crouch, 4},
+            {PlayerActionType.walk,    6},
+            {PlayerActionType.run,    6},
+            {PlayerActionType.fall,    2},
+            {PlayerActionType.crouchwalk, 6},
         };
 
         // Define size of player 
@@ -54,7 +54,7 @@ namespace Game {
             this.Stretch = System.Windows.Media.Stretch.UniformToFill;
             X = SpawnPositionX;
             Y = SpawnPositionY;
-            this.Action = ActionType.idle;
+            this.Action = PlayerActionType.idle;
         }
 
         // Static Constructor to load all the images to a Dictonary
@@ -63,7 +63,7 @@ namespace Game {
             // Create a path to the bitmaps
             string path = Environment.CurrentDirectory;
 
-            foreach (ActionType action in Enum.GetValues(typeof(ActionType))) {
+            foreach (PlayerActionType action in Enum.GetValues(typeof(PlayerActionType))) {
 
                 Player.Sources.Add(action, new List<BitmapImage>());
 
@@ -84,13 +84,13 @@ namespace Game {
         private int GetActionFrame() {
             return this.Action switch
             {
-                ActionType.walk => this.Frame % 6,
-                ActionType.run => this.Frame % 6,
-                ActionType.die => this.Frame % 4,
-                ActionType.jump => this.Frame % 4,
-                ActionType.crouch => this.Frame % 4,
-                ActionType.crouchwalk => this.Frame % 6,
-                ActionType.fall => this.Frame % 2,
+                PlayerActionType.walk => this.Frame % 6,
+                PlayerActionType.run => this.Frame % 6,
+                PlayerActionType.die => this.Frame % 4,
+                PlayerActionType.jump => this.Frame % 4,
+                PlayerActionType.crouch => this.Frame % 4,
+                PlayerActionType.crouchwalk => this.Frame % 6,
+                PlayerActionType.fall => this.Frame % 2,
                 _ => this.Frame % 4,
             };
 
@@ -101,13 +101,13 @@ namespace Game {
 
             return this.Action switch
             {
-                ActionType.walk   =>    80,
-                ActionType.run    =>    80,
-                ActionType.die    =>    70,
-                ActionType.jump   =>    60,
-                ActionType.crouch =>    250,
-                ActionType.crouchwalk=> 250,
-                ActionType.fall   =>    60,
+                PlayerActionType.walk   =>    80,
+                PlayerActionType.run    =>    80,
+                PlayerActionType.die    =>    70,
+                PlayerActionType.jump   =>    35,
+                PlayerActionType.crouch =>    250,
+                PlayerActionType.crouchwalk=> 250,
+                PlayerActionType.fall   =>    60,
                 _                 =>    200,
             };
 

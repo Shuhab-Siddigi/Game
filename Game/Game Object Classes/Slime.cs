@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace Game.Game_Object_Classes {
-    enum ActionType {
+    enum SlimeActionType {
         idle,
         die,
         hurt,
@@ -17,19 +17,19 @@ namespace Game.Game_Object_Classes {
         attack,
       
     }
-    class Slime : GameObject<ActionType> {
+    class Slime : GameObject<SlimeActionType> {
 
             
             
             private SlimeControls slimecontrols = new SlimeControls();
 
         // Create a Dictionary to hold all frames for each Actions
-        private static Dictionary<ActionType, int> ActionTypeFrames = new Dictionary<ActionType, int>() {
-            {ActionType.idle,   4},
-            {ActionType.die,    4},
-            {ActionType.hurt,   3},
-            {ActionType.move,    4},
-             {ActionType.attack,    5},
+        private static Dictionary<SlimeActionType, int> ActionTypeFrames = new Dictionary<SlimeActionType, int>() {
+            {SlimeActionType.idle,   4},
+            {SlimeActionType.die,    4},
+            {SlimeActionType.hurt,   3},
+            {SlimeActionType.move,    4},
+             {SlimeActionType.attack,    5},
 
         };
 
@@ -48,7 +48,7 @@ namespace Game.Game_Object_Classes {
                 // Create a path to the bitmaps
                 string path = Environment.CurrentDirectory;
 
-                foreach (ActionType action in Enum.GetValues(typeof(ActionType))) {
+                foreach (SlimeActionType action in Enum.GetValues(typeof(SlimeActionType))) {
 
                     Slime.Sources.Add(action, new List<BitmapImage>());
 
@@ -69,10 +69,10 @@ namespace Game.Game_Object_Classes {
             private int GetActionFrame() {
                 return this.Action switch
                 {
-                    ActionType.move => this.Frame % 4,
-                    ActionType.die => this.Frame % 4,
-                    ActionType.hurt => this.Frame % 3,
-                    ActionType.attack => this.Frame % 5,
+                    SlimeActionType.move => this.Frame % 4,
+                    SlimeActionType.die => this.Frame % 4,
+                    SlimeActionType.hurt => this.Frame % 3,
+                    SlimeActionType.attack => this.Frame % 5,
                     _ => this.Frame % 4,
                 };
 
@@ -83,10 +83,10 @@ namespace Game.Game_Object_Classes {
 
                 return this.Action switch
                 {
-                    ActionType.move => 80,
-                    ActionType.hurt => 80,
-                    ActionType.die => 70,
-                    ActionType.attack => 70,
+                    SlimeActionType.move => 80,
+                    SlimeActionType.hurt => 80,
+                    SlimeActionType.die => 70,
+                    SlimeActionType.attack => 70,
                     _ => 200,
                 };
 
