@@ -13,11 +13,12 @@ namespace Game.Game_Control_Classes {
 
 
         public void Movement(Slime slime) {
+            
+            if (slime.isBlockedBellow) {
+                slime.isFalling = false;
 
-
-
-
-
+            } 
+           
             slimeAnimation.Animation(slime);
 
            

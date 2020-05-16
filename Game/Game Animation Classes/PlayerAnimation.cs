@@ -26,12 +26,12 @@ namespace Game.Game_Animation_Classes {
 
                 if (LockFrame == 0) {
 
-                  
-
                     if (player.isFalling) {
                         player.Action = ActionType.fall;
                         player.Y += 9;
-                        
+
+
+
 
                         if (Input.D && !player.isBlockedRight) {
                             player.Y += 1;
@@ -78,12 +78,12 @@ namespace Game.Game_Animation_Classes {
                     if (player.Frame > 2) {
                         player.Frame = 3;
                     }
-                    
+
                 }
 
                 if (player.Action == ActionType.jump && !player.isBlockedAbove) {
                     player.Y -= 7;
-                    
+
                     if (Input.D && !player.isBlockedRight) {
                         player.X += 9;
                     } else if (Input.A && !player.isBlockedLeft) {
@@ -94,6 +94,8 @@ namespace Game.Game_Animation_Classes {
                     LockFrame = 0;
                 }
 
+
+            
 
 
                 player.SetSource();
@@ -143,6 +145,10 @@ namespace Game.Game_Animation_Classes {
 
 
         }
-    
+
+
+        private void WalkingLeft(Player player) {
+        
+        }
     }
 }

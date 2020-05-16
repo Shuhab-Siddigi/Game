@@ -17,30 +17,14 @@ namespace Game.Game_Object_Classes {
         attack,
       
     }
-    class Slime : Image {
+    class Slime : GameObject<ActionType> {
 
-
-            public int Frame { get; set; } = 0;
-            public ActionType Action { get; set; } = ActionType.idle;
-
-            public double X { get; set; } = 0; // Position X
-            public double Y { get; set; } = 0;   // Position Y 
-
-            private static Dictionary<ActionType, List<BitmapImage>> Sources = new Dictionary<ActionType, List<BitmapImage>>();
+            
             
             private SlimeControls slimecontrols = new SlimeControls();
 
-            public Rectangle HitBoxRender = new Rectangle();
-            public Rect HitBox = new Rect();
-
-            public bool isIdle { get; set; } = false;
-            public bool isFalling { get; set; } = false;
-            
-
-
-
-            // Create a Dictionary to hold all frames for each Actions
-            private static Dictionary<ActionType, int> ActionTypeFrames = new Dictionary<ActionType, int>() {
+        // Create a Dictionary to hold all frames for each Actions
+        private static Dictionary<ActionType, int> ActionTypeFrames = new Dictionary<ActionType, int>() {
             {ActionType.idle,   4},
             {ActionType.die,    4},
             {ActionType.hurt,   3},
@@ -123,12 +107,6 @@ namespace Game.Game_Object_Classes {
                 Canvas.SetTop(HitBoxRender, HitBox.Y);
             }
 
-            public void DefaultSettings() {
-                
-                this.isFalling = true;
-
-                HitBoxRender.Stroke = Brushes.Black;
-            }
 
             public void Update() {
                 Canvas.SetLeft(this, this.X); // position X of player

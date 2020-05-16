@@ -23,8 +23,15 @@ namespace Game {
         Wall BottomWall = new Wall(Block.blocksize * 0, Block.blocksize * 29, 39, 1);
         Wall LeftWall = new Wall(Block.blocksize * 0, Block.blocksize * 0, 1, 30);
         Wall RightWall = new Wall(Block.blocksize * 38, Block.blocksize * 0, 1, 30);
-        Wall MidWall1 = new Wall(Block.blocksize * 28, Block.blocksize * 27, 5, 1);
-      
+
+
+        Wall MidWall1 = new Wall(Block.blocksize * 10, Block.blocksize * 25, 5, 1);
+        Wall MidWall2 = new Wall(Block.blocksize * 28, Block.blocksize * 27, 5, 1);
+        Wall MidWall3 = new Wall(Block.blocksize * 2, Block.blocksize * 22, 5, 1);
+        Wall MidWall4 = new Wall(Block.blocksize * 14, Block.blocksize * 19, 5, 1);
+        Wall MidWall5 = new Wall(Block.blocksize * 20, Block.blocksize * 23, 5, 1);
+
+
         public GameWindow() {
 
             InitializeComponent();
@@ -49,22 +56,34 @@ namespace Game {
             AddWall(LeftWall);
             AddWall(RightWall);
             AddWall(MidWall1);
+            AddWall(MidWall2);
+            AddWall(MidWall3);
+            AddWall(MidWall4);
+            AddWall(MidWall5);
+
+            AddSlime(slime);
             
         }
 
         private void OnUpdate(object sender, EventArgs e) {
 
-
-            
             Input.Update();
-
-           slime.DefaultSettings();
+            
+            // Default settings
+            slime.DefaultSettings();
             player.DefaultSettings(); 
-            TopWall.Update(player);
-            BottomWall.Update(player);  
-            LeftWall.Update(player);       
-            RightWall.Update(player);
-            MidWall1.Update(player);
+
+            // Update Settings
+
+            TopWall.Update(player,slime);
+            BottomWall.Update(player, slime);  
+            LeftWall.Update(player, slime);       
+            RightWall.Update(player, slime);
+            MidWall1.Update(player, slime);
+            MidWall2.Update(player, slime);
+            MidWall3.Update(player, slime);
+            MidWall4.Update(player, slime);
+            MidWall5.Update(player, slime);
             player.Update();
             slime.Update();
 

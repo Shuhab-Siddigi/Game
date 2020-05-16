@@ -21,34 +21,18 @@ namespace Game {
         crouchwalk,
     }
 
-    class Player : Image {
-        public int Frame { get; set; } = 0;
-        public ActionType Action { get; set; } = ActionType.idle;
-
-        public double X { get; set; } = 0; // Position X
-        public double Y {get; set;} = 0;   // Position Y 
+    class Player : GameObject<ActionType> {
         
-        private static Dictionary<ActionType, List<BitmapImage>> Sources = new Dictionary<ActionType, List<BitmapImage>>();
+        
 
         private PlayerControls playercontrols = new PlayerControls();
 
-        public Rectangle HitBoxRender  = new Rectangle();
-        public Rect HitBox  = new Rect();
-
-        public bool isIdle { get; set; } = false;
-        public bool isFalling { get; set; } = false;
         public bool isWalking { get; set; } = false;
         public bool isRunning { get; set; } = false;
         public bool isJumping { get; set; } = false;
         public bool isCrouching { get; set; } = false;
         public bool isCrouchWalking { get; set; } = false;
-        public bool isBlockedLeft { get; set; } = false;
-        public bool isBlockedRight { get; set; } = false;
-        public bool isBlockedBellow { get; set; } = false;
-        public bool isBlockedAbove { get; set; } = false;
-        public bool isRight { get; set; } = false;
-
-
+ 
 
 
         // Create a Dictionary to hold all frames for each Actions
@@ -70,6 +54,7 @@ namespace Game {
             this.Stretch = System.Windows.Media.Stretch.UniformToFill;
             X = SpawnPositionX;
             Y = SpawnPositionY;
+            this.Action = ActionType.idle;
         }
 
         // Static Constructor to load all the images to a Dictonary
@@ -143,20 +128,13 @@ namespace Game {
             Canvas.SetTop(HitBoxRender, HitBox.Y);         
         }
 
-        public void DefaultSettings() {
+        public new void DefaultSettings() {
+            base.DefaultSettings();
             this.isWalking = false;
             this.isRunning = false;
             this.isJumping = false;
             this.isCrouching = false;
-            this.isBlockedLeft = false;
-            this.isBlockedRight = false;
-            this.isBlockedBellow = false;
-            this.isBlockedAbove = false;
             this.isCrouchWalking = false;
-
-            this.isFalling = true;
-
-            HitBoxRender.Stroke = Brushes.Black;
         }
 
         public void Update() {
