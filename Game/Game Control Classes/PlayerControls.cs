@@ -23,11 +23,11 @@ namespace Game {
                 player.isJumping = true;
             } else if ((Input.D || Input.A) && Input.Shift) {
                 player.isRunning = true;
-            } else if (Input.S && (Input.D || Input.A)) {
+            } else if ((Input.S && (Input.D || Input.A)) && !player.isFalling) {
                 player.isCrouchWalking = true;
             } else if ((Input.D || Input.A)) {
                 player.isWalking = true;
-            } else if (Input.S) {
+            } else if (Input.S && !player.isFalling) {
                 player.isCrouching = true;
             } else {
                 player.isIdle = true;

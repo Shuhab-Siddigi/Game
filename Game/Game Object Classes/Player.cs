@@ -118,6 +118,12 @@ namespace Game {
             HitBox.Height = this.Height - 10;
             HitBox.X = Canvas.GetLeft(this) + (this.Width / 2);
             HitBox.Y = Canvas.GetTop(this) + 10;
+
+            if (this.isCrouching || this.isCrouchWalking) {
+                HitBox.Height = (this.Height - 10) / 2;
+                HitBox.Y = Canvas.GetTop(this) + 10 + HitBox.Height;
+            }
+
         }
 
         // Add this to the Canvas if To set the CollisionBox Visible
@@ -140,9 +146,10 @@ namespace Game {
         public void Update() {
             Canvas.SetLeft(this, this.X); // position X of player
             Canvas.SetTop(this, this.Y);  // position Y of player
+            playercontrols.Movement(this);
             this.CollisionBox();
             this.CollisionBoxRender();
-            playercontrols.Movement(this);
+            
             
             
         }

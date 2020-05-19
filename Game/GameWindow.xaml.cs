@@ -48,20 +48,20 @@ namespace Game {
 
         private void startGame() {
 
-
             CompositionTarget.Rendering += OnUpdate;
+            
             Scene.Width = GlobalSettings.ScreenWidth;
             Scene.Height = GlobalSettings.ScreenHeight;
             Window.Width = GlobalSettings.ScreenWidth - 4;
             Window.Height = GlobalSettings.ScreenHeight - 1;
-
+            foreach (Wall wall in Walls) {
+                AddWall(wall);
+            }
             // Add objects to the screen
             AddSlime(slime);
             AddPlayer(player);
 
-            foreach (Wall wall in Walls) {
-                AddWall(wall);
-            }
+           
         }
 
 
