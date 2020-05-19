@@ -17,7 +17,15 @@ namespace Game {
         CollisionDetection collision = new CollisionDetection();
 
 
-        Slime slime = new Slime(100, 150, 40, 40);
+        
+        
+        List<Slime> Slimes = new List<Slime>() {
+            new Slime(100, 150, 40, 40),
+            new Slime(150, 150, 40, 40),
+            new Slime(200, 150, 40, 40),
+            new Slime(300, 150, 40, 40),
+        };
+
         Player player = new Player(10, 450, 50, 50);
 
         List<Wall> Walls = new List<Wall>() {
@@ -54,11 +62,16 @@ namespace Game {
             Scene.Height = GlobalSettings.ScreenHeight;
             Window.Width = GlobalSettings.ScreenWidth - 4;
             Window.Height = GlobalSettings.ScreenHeight - 1;
+           
             foreach (Wall wall in Walls) {
                 AddWall(wall);
             }
             // Add objects to the screen
-            AddSlime(slime);
+            
+            foreach(Slime slime in Slimes) {
+                AddSlime(slime);
+            }
+           
             AddPlayer(player);
 
            
@@ -68,20 +81,26 @@ namespace Game {
         private void OnUpdate(object sender, EventArgs e) {
 
                 Input.Update();
-
+            player.DefaultSettings();
                 // Default settings
+                
+            foreach(Slime slime in Slimes) {
                 slime.DefaultSettings();
-                player.DefaultSettings();
+            }
 
-                // Update Settings
-                foreach (Wall wall in Walls) {
-                    wall.Update(player, slime);
-                }
+            // Update Settings
+            foreach (Wall wall in Walls) {
+                wall.Update(player, Slimes);
+            }
 
-                player.Update();
+            foreach (Slime slime in Slimes) {
                 slime.Update();
+            }
+
+            player.Update();
             
         }
+
 
         private void AddWall(Wall wall) {
 

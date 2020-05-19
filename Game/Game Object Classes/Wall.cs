@@ -65,15 +65,21 @@ namespace Game.Game_Object_Classes {
 
         }
 
-        public void Update(Player player,Slime slime) {
+        public void Update(Player player,List<Slime> Slimes) {
             HitBoxRender.Stroke = Brushes.Black;
+            
             foreach (Block block in this) {
                 block.Update(player);
             }
+            
             CollisionBox();
             CollisionBoxRender();
             collision.WallCollision(player, this);
-            collision.WallCollision(slime, this);
+            
+            foreach(Slime slime in Slimes) {
+                collision.WallCollision(slime, this);
+            }
+           
 
         }
 
