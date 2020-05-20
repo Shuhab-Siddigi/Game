@@ -21,7 +21,7 @@ namespace Game.Game_Object_Classes {
 
             
             
-            private SlimeControls slimecontrols = new SlimeControls();
+        private SlimeControls slimecontrols = new SlimeControls();
 
         // Create a Dictionary to hold all frames for each Actions
         private static Dictionary<SlimeActionType, int> ActionTypeFrames = new Dictionary<SlimeActionType, int>() {

@@ -55,6 +55,16 @@ namespace Game {
             new Wall(Block.blocksize* 14, Block.blocksize* 13, 9, 1),
         };
 
+        List<Item> Items = new List<Item>() {
+
+            new Item(100,200,ItemType.apple,40),
+            new Item(200,200,ItemType.apple,40),
+            new Item(300,200,ItemType.apple,40),
+            new Item(700,120,ItemType.monkey,50),
+
+
+        };
+
         public GameWindow() {
 
             InitializeComponent();
@@ -79,7 +89,13 @@ namespace Game {
             foreach(Slime slime in Slimes) {
                 AddSlime(slime);
             }
-           
+
+            foreach (Item item in Items) {
+                AddItem(item);
+            }
+
+
+
             AddPlayer(player);
 
            
@@ -95,6 +111,9 @@ namespace Game {
             foreach(Slime slime in Slimes) {
                 slime.DefaultSettings();
             }
+            foreach (Item item in Items) {
+                item.DefaultSettings();
+            }
 
             // Update Settings
             foreach (Wall wall in Walls) {
@@ -105,6 +124,13 @@ namespace Game {
                 slime.Update(player);
                 if (slime.hit) {
                     RemoveSlime(slime);
+                }
+            }
+
+            foreach (Item item in Items.ToList()) {
+                item.Update(player);
+                if (item.hit) {
+                    RemoveItem(item);
                 }
             }
 
@@ -139,6 +165,11 @@ namespace Game {
            
         }
 
+        private void AddItem(Item item) {
+            Scene.Children.Add(item);
+            Scene.Children.Add(item.HitBoxRender);
+        }
+
         private void RemovePlayer(Player player) {
             Scene.Children.Remove(player);
             Scene.Children.Remove(player.HitBoxRender);
@@ -152,7 +183,13 @@ namespace Game {
         private void RemoveSlime(Slime slime) {
             Scene.Children.Remove(slime);
             Scene.Children.Remove(slime.HitBoxRender);
-             Slimes.Remove(slime);
+            Slimes.Remove(slime);
+        }
+
+        private void RemoveItem(Item item) {
+            Scene.Children.Remove(item);
+            Scene.Children.Remove(item.HitBoxRender);
+            Items.Remove(item);
         }
 
 

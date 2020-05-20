@@ -111,7 +111,17 @@ namespace Game {
             Dictionary<CollisionEdge, bool> EdgeHit = CollisionPoint(player.HitBox, slime.HitBox);
             if ((EdgeHit[CollisionEdge.Below] || EdgeHit[CollisionEdge.Above] || EdgeHit[CollisionEdge.Left] || EdgeHit[CollisionEdge.Right] ) && player.isAttacking1) {
                 slime.hit = true;
+                slime.HitBoxRender.Stroke = Brushes.Red;
                 Trace.WriteLine("HIT");
+            }
+        }
+
+        public static void ItemCollision(Player player, Item item) {
+            Dictionary<CollisionEdge, bool> EdgeHit = CollisionPoint(player.HitBox, item.HitBox);
+            if ((EdgeHit[CollisionEdge.Below] || EdgeHit[CollisionEdge.Above] || EdgeHit[CollisionEdge.Left] || EdgeHit[CollisionEdge.Right])) {
+                item.hit = true;
+                Trace.WriteLine("HIT");
+                item.HitBoxRender.Stroke = Brushes.Red;
             }
         }
 
