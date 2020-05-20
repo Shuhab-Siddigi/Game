@@ -20,6 +20,8 @@ namespace Game {
         public bool isRight { get; set; } = false;
         public bool isFalling { get; set; } = false;
 
+        public bool hit  {get; set;} = false;
+
         public Rectangle HitBoxRender = new Rectangle();
 
         public Rect HitBox = new Rect();

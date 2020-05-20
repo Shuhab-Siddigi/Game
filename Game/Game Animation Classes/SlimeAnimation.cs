@@ -42,6 +42,8 @@ namespace Game.Game_Animation_Classes {
                     }
                 }
 
+                
+
 
                 slime.SetSource();
                 slime.Frame += 1;

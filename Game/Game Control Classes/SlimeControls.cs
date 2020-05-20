@@ -20,7 +20,6 @@ namespace Game.Game_Control_Classes {
             } 
            
             slimeAnimation.Animation(slime);
-
            
         }
     }

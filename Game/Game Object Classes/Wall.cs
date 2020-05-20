@@ -19,7 +19,6 @@ namespace Game.Game_Object_Classes {
 
         public Rect WallHitBox = new Rect();
         public Rectangle HitBoxRender = new Rectangle();
-        CollisionDetection collision = new CollisionDetection();
 
         private int Width = 0;
         private int Height = 0;
@@ -74,10 +73,10 @@ namespace Game.Game_Object_Classes {
             
             CollisionBox();
             CollisionBoxRender();
-            collision.WallCollision(player, this);
+            CollisionDetection.WallCollision(player, this);
             
             foreach(Slime slime in Slimes) {
-                collision.WallCollision(slime, this);
+                CollisionDetection.WallCollision(slime, this);
             }
            
 

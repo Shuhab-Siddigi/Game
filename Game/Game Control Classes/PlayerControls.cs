@@ -1,4 +1,5 @@
 ﻿using Game.Game_Animation_Classes;
+using System.Diagnostics;
 using System.Windows;
 
 
@@ -19,15 +20,17 @@ namespace Game {
                 player.isRight = true;
             }
 
-            if (Input.Space || Input.W) {
+            if (Input.W) {
                 player.isJumping = true;
+            } else if (Input.Space) {
+                player.isAttacking1 = true;
             } else if ((Input.D || Input.A) && Input.Shift) {
                 player.isRunning = true;
-            } else if ((Input.S && (Input.D || Input.A)) && !player.isFalling) {
+            } else if (Input.S && (Input.D || Input.A)) {
                 player.isCrouchWalking = true;
             } else if ((Input.D || Input.A)) {
                 player.isWalking = true;
-            } else if (Input.S && !player.isFalling) {
+            } else if (Input.S) {
                 player.isCrouching = true;
             } else {
                 player.isIdle = true;
@@ -35,7 +38,7 @@ namespace Game {
 
             //playerAnimation.GODMODE(player);
             playerAnimation.Animation(player);
-
+            
         }
 
 

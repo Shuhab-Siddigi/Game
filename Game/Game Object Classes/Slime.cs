@@ -107,13 +107,20 @@ namespace Game.Game_Object_Classes {
                 Canvas.SetTop(HitBoxRender, HitBox.Y);
             }
 
+            public new void DefaultSettings() {
+            base.DefaultSettings();
+            this.hit = false;
+            }
 
-            public void Update() {
+
+            public void Update(Player player) {
                 Canvas.SetLeft(this, this.X); // position X of player
                 Canvas.SetTop(this, this.Y);  // position Y of player
                 this.CollisionBox();
                 this.CollisionBoxRender();
                 slimecontrols.Movement(this);
+                CollisionDetection.SlimeCollision(player, this);
+                
                 // If the player is not touching anything
 
             }

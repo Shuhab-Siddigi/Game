@@ -19,6 +19,8 @@ namespace Game {
         crouch,
         fall,
         crouchwalk,
+        attack1,
+
     }
 
     class Player : GameObject<PlayerActionType> {
@@ -32,6 +34,8 @@ namespace Game {
         public bool isJumping { get; set; } = false;
         public bool isCrouching { get; set; } = false;
         public bool isCrouchWalking { get; set; } = false;
+
+        public bool isAttacking1 { get; set; } = false;
  
 
 
@@ -45,6 +49,7 @@ namespace Game {
             {PlayerActionType.run,    6},
             {PlayerActionType.fall,    2},
             {PlayerActionType.crouchwalk, 6},
+             {PlayerActionType.attack1, 5},
         };
 
         // Define size of player 
@@ -91,6 +96,7 @@ namespace Game {
                 PlayerActionType.crouch => this.Frame % 4,
                 PlayerActionType.crouchwalk => this.Frame % 6,
                 PlayerActionType.fall => this.Frame % 2,
+                PlayerActionType.attack1 => this.Frame % 5,
                 _ => this.Frame % 4,
             };
 
@@ -108,6 +114,7 @@ namespace Game {
                 PlayerActionType.crouch =>    250,
                 PlayerActionType.crouchwalk=> 250,
                 PlayerActionType.fall   =>    60,
+                PlayerActionType.attack1 => 175, // 150
                 _                 =>    200,
             };
 
@@ -141,6 +148,7 @@ namespace Game {
             this.isJumping = false;
             this.isCrouching = false;
             this.isCrouchWalking = false;
+            
         }
 
         public void Update() {

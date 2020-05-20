@@ -11,6 +11,7 @@ namespace Game.Game_Animation_Classes {
 
         Stopwatch PlayerFrameCounter = new Stopwatch();
         int LockFrame = 0;
+        int counter = 0;
         
         public PlayerAnimation() {
             PlayerFrameCounter.Start();
@@ -23,14 +24,14 @@ namespace Game.Game_Animation_Classes {
 
 
             if (PlayerFrameCounter.ElapsedMilliseconds > player.ActionTime()) {
-
+              
                 if (LockFrame == 0) {
 
                     if (player.isFalling) {
                         player.Action = PlayerActionType.fall;
                         player.Y += 9;
 
-
+                    
 
 
                         if (Input.D && !player.isBlockedRight) {
@@ -41,6 +42,7 @@ namespace Game.Game_Animation_Classes {
                             player.X -= 10;
                         }
 
+
                     } else if (player.isRunning) {
                         player.Action = PlayerActionType.run;
                         if (Input.D && !player.isBlockedRight) {
@@ -48,6 +50,12 @@ namespace Game.Game_Animation_Classes {
                         } else if (Input.A && !player.isBlockedLeft) {
                             player.X -= 6;
                         }
+                    } else if (player.isAttacking1 && !player.isFalling) {
+                        player.Action = PlayerActionType.attack1;
+                        player.Frame = 0;
+                        LockFrame = 4;
+                        Trace.WriteLine(LockFrame);
+                      
                     } else if (player.isCrouchWalking) {
                         player.Action = PlayerActionType.crouchwalk;
                         if (Input.D && !player.isBlockedRight) {
@@ -75,14 +83,18 @@ namespace Game.Game_Animation_Classes {
 
                 } else {
                     LockFrame--;
+                }
+
+               
+                if(player.isAttacking1 && LockFrame == 0) {
+                    player.isAttacking1 = false;
+                }
+               
+                if (player.Action == PlayerActionType.jump && !player.isBlockedAbove) {
+                    player.Y -= 7;
                     if (player.Frame > 2) {
                         player.Frame = 3;
                     }
-
-                }
-
-                if (player.Action == PlayerActionType.jump && !player.isBlockedAbove) {
-                    player.Y -= 7;
 
                     if (Input.D && !player.isBlockedRight) {
                         player.X += 9;
@@ -93,9 +105,6 @@ namespace Game.Game_Animation_Classes {
                     player.isFalling = true;
                     LockFrame = 0;
                 }
-
-
-            
 
 
                 player.SetSource();

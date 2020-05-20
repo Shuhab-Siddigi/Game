@@ -11,7 +11,7 @@ namespace Game {
 
     
 
-    class CollisionDetection {
+    static class CollisionDetection {
 
 
         public enum CollisionEdge {
@@ -21,7 +21,7 @@ namespace Game {
             Left = 3,
         }
 
-        public Dictionary<CollisionEdge, bool> CollisionPoint(Rect player, Rect rect) {
+        public static Dictionary<CollisionEdge, bool> CollisionPoint(Rect player, Rect rect) {
 
 
             bool Below = (player.Bottom >= rect.Top) && (player.Bottom <= rect.Top+10)  && (player.Right >= rect.Left) && (player.Left <= rect.Right); 
@@ -74,7 +74,7 @@ namespace Game {
             
         }
         */
-        public void WallCollision<T>(GameObject<T> gameObject,Wall wall) {
+        public static void WallCollision<T>(GameObject<T> gameObject,Wall wall) {
            
             Dictionary<CollisionEdge, bool> EdgeHit = CollisionPoint(gameObject.HitBox, wall.WallHitBox );
             if (EdgeHit[CollisionEdge.Below]) {
@@ -107,11 +107,13 @@ namespace Game {
         }
 
 
-
-
-
-
-
+        public static void SlimeCollision(Player player, Slime slime) {
+            Dictionary<CollisionEdge, bool> EdgeHit = CollisionPoint(player.HitBox, slime.HitBox);
+            if ((EdgeHit[CollisionEdge.Below] || EdgeHit[CollisionEdge.Above] || EdgeHit[CollisionEdge.Left] || EdgeHit[CollisionEdge.Right] ) && player.isAttacking1) {
+                slime.hit = true;
+                Trace.WriteLine("HIT");
+            }
+        }
 
 
     }
